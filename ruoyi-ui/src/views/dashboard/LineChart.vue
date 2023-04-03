@@ -64,10 +64,10 @@ export default {
     setOptions({ expectedData, actualData } = {}) {
       this.chart.setOption({
         xAxis: {
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          data: ['2017','2018','2019', '2020', '2021', '2022', '2023'],
           boundaryGap: false,
           axisTick: {
-            show: false
+            show: true
           }
         },
         grid: {
@@ -86,14 +86,14 @@ export default {
         },
         yAxis: {
           axisTick: {
-            show: false
+            show: true
           }
         },
         legend: {
-          data: ['expected', 'actual']
+          data: ['应上交合同数', '实际交合同数']
         },
         series: [{
-          name: 'expected', itemStyle: {
+          name: '应上交合同数', itemStyle: {
             normal: {
               color: '#FF005A',
               lineStyle: {
@@ -109,7 +109,7 @@ export default {
           animationEasing: 'cubicInOut'
         },
         {
-          name: 'actual',
+          name: '实际交合同数',
           smooth: true,
           type: 'line',
           itemStyle: {

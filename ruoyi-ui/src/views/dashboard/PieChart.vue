@@ -52,7 +52,7 @@ export default {
         legend: {
           left: 'center',
           bottom: '10',
-          data: ['Industries', 'Technology', 'Forex', 'Gold', 'Forecasts']
+          data: ['计算机学院', '理学院', '马克思学院', '外国语学院', '其他']
         },
         series: [
           {
@@ -62,11 +62,11 @@ export default {
             radius: [15, 95],
             center: ['50%', '38%'],
             data: [
-              { value: 320, name: 'Industries' },
-              { value: 240, name: 'Technology' },
-              { value: 149, name: 'Forex' },
-              { value: 100, name: 'Gold' },
-              { value: 59, name: 'Forecasts' }
+              { value: 320, name: '计算机学院' },
+              { value: 240, name: '理学院' },
+              { value: 149, name: '马克思学院' },
+              { value: 100, name: '外国语学院' },
+              { value: 59, name: '其他' }
             ],
             animationEasing: 'cubicInOut',
             animationDuration: 2600
