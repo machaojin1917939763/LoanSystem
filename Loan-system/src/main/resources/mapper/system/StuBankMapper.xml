@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loan.system.mapper.StuBankMapper">
+    
+    <resultMap type="StuBank" id="StuBankResult">
+        <result property="bankId"    column="bank_id"    />
+        <result property="bankName"    column="bank_name"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="creator"    column="creator"    />
+        <result property="updater"    column="updater"    />
+    </resultMap>
+
+    <sql id="selectStuBankVo">
+        select bank_id, bank_name, create_time, update_time, creator, updater from stu_bank
+    </sql>
+
+    <select id="selectStuBankList" parameterType="StuBank" resultMap="StuBankResult">
+        <include refid="selectStuBankVo"/>
+        <where>  
+            <if test="bankName != null  and bankName != ''"> and bank_name like concat('%', #{bankName}, '%')</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="updater != null  and updater != ''"> and updater = #{updater}</if>
+        </where>
+    </select>
+    
+    <select id="selectStuBankByBankId" parameterType="Long" resultMap="StuBankResult">
+        <include refid="selectStuBankVo"/>
+        where bank_id = #{bankId}
+    </select>
+        
+    <insert id="insertStuBank" parameterType="StuBank" useGeneratedKeys="true" keyProperty="bankId">
+        insert into stu_bank
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bankName != null and bankName != ''">bank_name,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="creator != null">creator,</if>
+            <if test="updater != null">updater,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bankName != null and bankName != ''">#{bankName},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="creator != null">#{creator},</if>
+            <if test="updater != null">#{updater},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStuBank" parameterType="StuBank">
+        update stu_bank
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="bankName != null and bankName != ''">bank_name = #{bankName},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="creator != null">creator = #{creator},</if>
+            <if test="updater != null">updater = #{updater},</if>
+        </trim>
+        where bank_id = #{bankId}
+    </update>
+
+    <delete id="deleteStuBankByBankId" parameterType="Long">
+        delete from stu_bank where bank_id = #{bankId}
+    </delete>
+
+    <delete id="deleteStuBankByBankIds" parameterType="String">
+        delete from stu_bank where bank_id in 
+        <foreach item="bankId" collection="array" open="(" separator="," close=")">
+            #{bankId}
+        </foreach>
+    </delete>
+</mapper>

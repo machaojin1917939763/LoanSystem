@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loan.system.mapper.StuClassMapper">
+    
+    <resultMap type="StuClass" id="StuClassResult">
+        <result property="classId"    column="class_id"    />
+        <result property="name"    column="name"    />
+        <result property="gradeId"    column="grade_id"    />
+        <result property="totalStudents"    column="total_students"    />
+        <result property="totalBorrowers"    column="total_borrowers"    />
+        <result property="totalContracts"    column="total_contracts"    />
+        <result property="creator"    column="creator"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updater"    column="updater"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectStuClassVo">
+        select class_id, name, grade_id, total_students, total_borrowers, total_contracts, creator, create_time, updater, update_time from stu_class
+    </sql>
+
+    <select id="selectStuClassList" parameterType="StuClass" resultMap="StuClassResult">
+        <include refid="selectStuClassVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="gradeId != null "> and grade_id = #{gradeId}</if>
+            <if test="totalStudents != null "> and total_students = #{totalStudents}</if>
+            <if test="totalBorrowers != null "> and total_borrowers = #{totalBorrowers}</if>
+            <if test="totalContracts != null "> and total_contracts = #{totalContracts}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="updater != null  and updater != ''"> and updater = #{updater}</if>
+        </where>
+    </select>
+    
+    <select id="selectStuClassByClassId" parameterType="Long" resultMap="StuClassResult">
+        <include refid="selectStuClassVo"/>
+        where class_id = #{classId}
+    </select>
+        
+    <insert id="insertStuClass" parameterType="StuClass" useGeneratedKeys="true" keyProperty="classId">
+        insert into stu_class
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="gradeId != null">grade_id,</if>
+            <if test="totalStudents != null">total_students,</if>
+            <if test="totalBorrowers != null">total_borrowers,</if>
+            <if test="totalContracts != null">total_contracts,</if>
+            <if test="creator != null">creator,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updater != null">updater,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="gradeId != null">#{gradeId},</if>
+            <if test="totalStudents != null">#{totalStudents},</if>
+            <if test="totalBorrowers != null">#{totalBorrowers},</if>
+            <if test="totalContracts != null">#{totalContracts},</if>
+            <if test="creator != null">#{creator},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updater != null">#{updater},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStuClass" parameterType="StuClass">
+        update stu_class
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="gradeId != null">grade_id = #{gradeId},</if>
+            <if test="totalStudents != null">total_students = #{totalStudents},</if>
+            <if test="totalBorrowers != null">total_borrowers = #{totalBorrowers},</if>
+            <if test="totalContracts != null">total_contracts = #{totalContracts},</if>
+            <if test="creator != null">creator = #{creator},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updater != null">updater = #{updater},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where class_id = #{classId}
+    </update>
+
+    <delete id="deleteStuClassByClassId" parameterType="Long">
+        delete from stu_class where class_id = #{classId}
+    </delete>
+
+    <delete id="deleteStuClassByClassIds" parameterType="String">
+        delete from stu_class where class_id in 
+        <foreach item="classId" collection="array" open="(" separator="," close=")">
+            #{classId}
+        </foreach>
+    </delete>
+</mapper>
