@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysGradeMapper">
+    
+    <resultMap type="SysGrade" id="SysGradeResult">
+        <result property="gradeId"    column="grade_id"    />
+        <result property="name"    column="name"    />
+        <result property="majorId"    column="major_id"    />
+        <result property="creator"    column="creator"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updater"    column="updater"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSysGradeVo">
+        select grade_id, name, major_id, creator, create_time, updater, update_time from sys_grade
+    </sql>
+
+    <select id="selectSysGradeList" parameterType="SysGrade" resultMap="SysGradeResult">
+        <include refid="selectSysGradeVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="majorId != null "> and major_id = #{majorId}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="updater != null  and updater != ''"> and updater = #{updater}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysGradeByGradeId" parameterType="Long" resultMap="SysGradeResult">
+        <include refid="selectSysGradeVo"/>
+        where grade_id = #{gradeId}
+    </select>
+        
+    <insert id="insertSysGrade" parameterType="SysGrade" useGeneratedKeys="true" keyProperty="gradeId">
+        insert into sys_grade
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="majorId != null">major_id,</if>
+            <if test="creator != null">creator,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updater != null">updater,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="majorId != null">#{majorId},</if>
+            <if test="creator != null">#{creator},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updater != null">#{updater},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysGrade" parameterType="SysGrade">
+        update sys_grade
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="majorId != null">major_id = #{majorId},</if>
+            <if test="creator != null">creator = #{creator},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updater != null">updater = #{updater},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where grade_id = #{gradeId}
+    </update>
+
+    <delete id="deleteSysGradeByGradeId" parameterType="Long">
+        delete from sys_grade where grade_id = #{gradeId}
+    </delete>
+
+    <delete id="deleteSysGradeByGradeIds" parameterType="String">
+        delete from sys_grade where grade_id in 
+        <foreach item="gradeId" collection="array" open="(" separator="," close=")">
+            #{gradeId}
+        </foreach>
+    </delete>
+</mapper>
