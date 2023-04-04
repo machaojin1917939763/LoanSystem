@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      title: '若依管理系统',
+      title: '生源地贷款管理系统',
       logo: logoImg
     }
   }

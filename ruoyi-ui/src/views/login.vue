@@ -1,7 +1,9 @@
 <template>
   <div class="login">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">生源地高校贷款管理系统</h3>
+      <div class="login-title">
+        <h2>生源地贷款管理系统</h2>
+      </div>
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
@@ -58,7 +60,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      <span>Copyright © 生源地贷款高校管理系统</span>
+      <span>Copyright © 生源地贷款管理系统</span>
     </div>
   </div>
 </template>
@@ -166,13 +168,29 @@ export default {
   background-image: url("../assets/images/login-background.jpg");
   background-size: cover;
 }
-.title {
-  margin: 0px auto 30px auto;
+.logo-title {
+  //和login-logo在一行
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: #ffffff;
   text-align: center;
-  color: #707070;
+  margin-bottom: 20px;
+
+}
+.login-logo {
+  width: 50px;
+  height: 50px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .login-form {
+  //将login-form向右移动
+  margin-left: 700px;
   border-radius: 6px;
   background: #ffffff;
   width: 400px;
@@ -183,6 +201,7 @@ export default {
       height: 38px;
     }
   }
+
   .input-icon {
     height: 39px;
     width: 14px;
@@ -190,7 +209,7 @@ export default {
   }
 }
 .login-tip {
-  font-size: 13px;
+  font-size: 16px;
   text-align: center;
   color: #bfbfbf;
 }

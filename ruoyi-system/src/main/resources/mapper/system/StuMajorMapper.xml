@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.StuMajorMapper">
+    
+    <resultMap type="StuMajor" id="StuMajorResult">
+        <result property="majorId"    column="major_id"    />
+        <result property="name"    column="name"    />
+        <result property="collegeId"    column="college_id"    />
+        <result property="totalStudents"    column="total_students"    />
+        <result property="totalBorrowers"    column="total_borrowers"    />
+        <result property="totalContracts"    column="total_contracts"    />
+        <result property="creator"    column="creator"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updater"    column="updater"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectStuMajorVo">
+        select major_id, name, college_id, total_students, total_borrowers, total_contracts, creator, create_time, updater, update_time from stu_major
+    </sql>
+
+    <select id="selectStuMajorList" parameterType="StuMajor" resultMap="StuMajorResult">
+        <include refid="selectStuMajorVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="collegeId != null "> and college_id = #{collegeId}</if>
+            <if test="totalStudents != null "> and total_students = #{totalStudents}</if>
+            <if test="totalBorrowers != null "> and total_borrowers = #{totalBorrowers}</if>
+            <if test="totalContracts != null "> and total_contracts = #{totalContracts}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="updater != null  and updater != ''"> and updater = #{updater}</if>
+        </where>
+    </select>
+    
+    <select id="selectStuMajorByMajorId" parameterType="Long" resultMap="StuMajorResult">
+        <include refid="selectStuMajorVo"/>
+        where major_id = #{majorId}
+    </select>
+        
+    <insert id="insertStuMajor" parameterType="StuMajor" useGeneratedKeys="true" keyProperty="majorId">
+        insert into stu_major
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="collegeId != null">college_id,</if>
+            <if test="totalStudents != null">total_students,</if>
+            <if test="totalBorrowers != null">total_borrowers,</if>
+            <if test="totalContracts != null">total_contracts,</if>
+            <if test="creator != null">creator,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updater != null">updater,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="collegeId != null">#{collegeId},</if>
+            <if test="totalStudents != null">#{totalStudents},</if>
+            <if test="totalBorrowers != null">#{totalBorrowers},</if>
+            <if test="totalContracts != null">#{totalContracts},</if>
+            <if test="creator != null">#{creator},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updater != null">#{updater},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStuMajor" parameterType="StuMajor">
+        update stu_major
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="collegeId != null">college_id = #{collegeId},</if>
+            <if test="totalStudents != null">total_students = #{totalStudents},</if>
+            <if test="totalBorrowers != null">total_borrowers = #{totalBorrowers},</if>
+            <if test="totalContracts != null">total_contracts = #{totalContracts},</if>
+            <if test="creator != null">creator = #{creator},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updater != null">updater = #{updater},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where major_id = #{majorId}
+    </update>
+
+    <delete id="deleteStuMajorByMajorId" parameterType="Long">
+        delete from stu_major where major_id = #{majorId}
+    </delete>
+
+    <delete id="deleteStuMajorByMajorIds" parameterType="String">
+        delete from stu_major where major_id in 
+        <foreach item="majorId" collection="array" open="(" separator="," close=")">
+            #{majorId}
+        </foreach>
+    </delete>
+</mapper>
