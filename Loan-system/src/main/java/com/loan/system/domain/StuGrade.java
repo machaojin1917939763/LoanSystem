@@ -24,7 +24,7 @@ public class StuGrade extends BaseEntity
 
     /** 所属专业ID */
     @Excel(name = "所属专业ID")
-    private Long majorId;
+    private String majorId;
 
     /** 年级总人数 */
     @Excel(name = "年级总人数")
@@ -64,12 +64,12 @@ public class StuGrade extends BaseEntity
     {
         return name;
     }
-    public void setMajorId(Long majorId) 
+    public void setMajorId(String majorId)
     {
         this.majorId = majorId;
     }
 
-    public Long getMajorId() 
+    public String getMajorId()
     {
         return majorId;
     }

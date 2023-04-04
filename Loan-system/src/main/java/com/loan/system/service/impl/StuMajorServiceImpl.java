@@ -50,7 +50,12 @@ public class StuMajorServiceImpl implements IStuMajorService
         for (StuMajor major : stuMajors) {
             String collegeId = major.getCollegeId();
             StuCollege stuCollege = stuCollegeMapper.selectStuCollegeByCollegeId(Long.parseLong(collegeId));
-            major.setCollegeId(stuCollege.getName());
+            if (stuCollege!=null){
+                major.setCollegeId(stuCollege.getName());
+            }else {
+                return null;
+            }
+
         }
         return stuMajors;
     }

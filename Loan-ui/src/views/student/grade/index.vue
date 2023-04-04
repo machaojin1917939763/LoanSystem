@@ -139,7 +139,7 @@
           <el-input v-model="form.name" placeholder="请输入年级名称" />
         </el-form-item>
         <el-form-item label="所属专业" prop="majorId">
-          <el-input v-model="form.majorId" placeholder="请输入所属专业" />
+          <el-input v-model="form.majorId" placeholder="请输入所属专业ID" />
         </el-form-item>
         <el-form-item label="年级总人数" prop="totalStudents">
           <el-input v-model="form.totalStudents" placeholder="请输入年级总人数" />
