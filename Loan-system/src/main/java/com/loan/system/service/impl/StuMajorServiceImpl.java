@@ -2,6 +2,8 @@ package com.loan.system.service.impl;
 
 import java.util.List;
 import com.loan.common.utils.DateUtils;
+import com.loan.system.domain.StuCollege;
+import com.loan.system.mapper.StuCollegeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.loan.system.mapper.StuMajorMapper;
@@ -19,6 +21,9 @@ public class StuMajorServiceImpl implements IStuMajorService
 {
     @Autowired
     private StuMajorMapper stuMajorMapper;
+
+    @Autowired
+    private StuCollegeMapper stuCollegeMapper;
 
     /**
      * 查询专业管理
@@ -41,7 +46,13 @@ public class StuMajorServiceImpl implements IStuMajorService
     @Override
     public List<StuMajor> selectStuMajorList(StuMajor stuMajor)
     {
-        return stuMajorMapper.selectStuMajorList(stuMajor);
+        List<StuMajor> stuMajors = stuMajorMapper.selectStuMajorList(stuMajor);
+        for (StuMajor major : stuMajors) {
+            String collegeId = major.getCollegeId();
+            StuCollege stuCollege = stuCollegeMapper.selectStuCollegeByCollegeId(Long.parseLong(collegeId));
+            major.setCollegeId(stuCollege.getName());
+        }
+        return stuMajors;
     }
 
     /**
