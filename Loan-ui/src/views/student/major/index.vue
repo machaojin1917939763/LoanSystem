@@ -9,10 +9,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="所属学院ID" prop="collegeId">
+      <el-form-item label="所属学院" prop="collegeId">
         <el-input
           v-model="queryParams.collegeId"
-          placeholder="请输入所属学院ID"
+          placeholder="请输入所属学院"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -41,22 +41,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="创建人" prop="creator">
-        <el-input
-          v-model="queryParams.creator"
-          placeholder="请输入创建人"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="更新人" prop="updater">
-        <el-input
-          v-model="queryParams.updater"
-          placeholder="请输入更新人"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
+
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -113,7 +98,7 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="专业ID" align="center" prop="majorId" />
       <el-table-column label="专业名称" align="center" prop="name" />
-      <el-table-column label="所属学院ID" align="center" prop="collegeId" />
+      <el-table-column label="所属学院" align="center" prop="collegeId" />
       <el-table-column label="专业总人数" align="center" prop="totalStudents" />
       <el-table-column label="贷款总人数" align="center" prop="totalBorrowers" />
       <el-table-column label="上交合同数" align="center" prop="totalContracts" />
@@ -153,8 +138,8 @@
         <el-form-item label="专业名称" prop="name">
           <el-input v-model="form.name" placeholder="请输入专业名称" />
         </el-form-item>
-        <el-form-item label="所属学院ID" prop="collegeId">
-          <el-input v-model="form.collegeId" placeholder="请输入所属学院ID" />
+        <el-form-item label="所属学院" prop="collegeId">
+          <el-input v-model="form.collegeId" placeholder="请输入所属学院" />
         </el-form-item>
         <el-form-item label="专业总人数" prop="totalStudents">
           <el-input v-model="form.totalStudents" placeholder="请输入专业总人数" />
@@ -165,12 +150,7 @@
         <el-form-item label="上交合同数" prop="totalContracts">
           <el-input v-model="form.totalContracts" placeholder="请输入上交合同数" />
         </el-form-item>
-        <el-form-item label="创建人" prop="creator">
-          <el-input v-model="form.creator" placeholder="请输入创建人" />
-        </el-form-item>
-        <el-form-item label="更新人" prop="updater">
-          <el-input v-model="form.updater" placeholder="请输入更新人" />
-        </el-form-item>
+
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
