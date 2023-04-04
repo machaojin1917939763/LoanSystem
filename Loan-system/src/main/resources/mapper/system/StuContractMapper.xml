@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loan.system.mapper.StuContractMapper">
+    
+    <resultMap type="StuContract" id="StuContractResult">
+        <result property="id"    column="id"    />
+        <result property="contractUrl"    column="contract_url"    />
+        <result property="academicYear"    column="academic_year"    />
+        <result property="studentId"    column="student_id"    />
+        <result property="loanAmount"    column="loan_amount"    />
+        <result property="isDisbursed"    column="is_disbursed"    />
+        <result property="bankId"    column="bank_id"    />
+        <result property="tuitionFee"    column="tuition_fee"    />
+        <result property="deductionDate"    column="deduction_date"    />
+        <result property="disbursementDate"    column="disbursement_date"    />
+        <result property="bankName"    column="bank_name"    />
+        <result property="designatedAccount"    column="designated_account"    />
+        <result property="verificationCode"    column="verification_code"    />
+        <result property="idCardNumber"    column="id_card_number"    />
+        <result property="creator"    column="creator"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updater"    column="updater"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectStuContractVo">
+        select id, contract_url, academic_year, student_id, loan_amount, is_disbursed, bank_id, tuition_fee, deduction_date, disbursement_date, bank_name, designated_account, verification_code, id_card_number, creator, create_time, updater, update_time from stu_contract
+    </sql>
+
+    <select id="selectStuContractList" parameterType="StuContract" resultMap="StuContractResult">
+        <include refid="selectStuContractVo"/>
+        <where>  
+            <if test="contractUrl != null  and contractUrl != ''"> and contract_url = #{contractUrl}</if>
+            <if test="academicYear != null  and academicYear != ''"> and academic_year = #{academicYear}</if>
+            <if test="studentId != null "> and student_id = #{studentId}</if>
+            <if test="loanAmount != null "> and loan_amount = #{loanAmount}</if>
+            <if test="isDisbursed != null "> and is_disbursed = #{isDisbursed}</if>
+            <if test="bankId != null "> and bank_id = #{bankId}</if>
+            <if test="tuitionFee != null "> and tuition_fee = #{tuitionFee}</if>
+            <if test="deductionDate != null "> and deduction_date = #{deductionDate}</if>
+            <if test="disbursementDate != null "> and disbursement_date = #{disbursementDate}</if>
+            <if test="bankName != null  and bankName != ''"> and bank_name like concat('%', #{bankName}, '%')</if>
+            <if test="designatedAccount != null  and designatedAccount != ''"> and designated_account = #{designatedAccount}</if>
+            <if test="verificationCode != null  and verificationCode != ''"> and verification_code = #{verificationCode}</if>
+            <if test="idCardNumber != null  and idCardNumber != ''"> and id_card_number = #{idCardNumber}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="updater != null  and updater != ''"> and updater = #{updater}</if>
+        </where>
+    </select>
+    
+    <select id="selectStuContractById" parameterType="Long" resultMap="StuContractResult">
+        <include refid="selectStuContractVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertStuContract" parameterType="StuContract" useGeneratedKeys="true" keyProperty="id">
+        insert into stu_contract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="contractUrl != null">contract_url,</if>
+            <if test="academicYear != null">academic_year,</if>
+            <if test="studentId != null">student_id,</if>
+            <if test="loanAmount != null">loan_amount,</if>
+            <if test="isDisbursed != null">is_disbursed,</if>
+            <if test="bankId != null">bank_id,</if>
+            <if test="tuitionFee != null">tuition_fee,</if>
+            <if test="deductionDate != null">deduction_date,</if>
+            <if test="disbursementDate != null">disbursement_date,</if>
+            <if test="bankName != null">bank_name,</if>
+            <if test="designatedAccount != null">designated_account,</if>
+            <if test="verificationCode != null">verification_code,</if>
+            <if test="idCardNumber != null">id_card_number,</if>
+            <if test="creator != null">creator,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updater != null">updater,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="contractUrl != null">#{contractUrl},</if>
+            <if test="academicYear != null">#{academicYear},</if>
+            <if test="studentId != null">#{studentId},</if>
+            <if test="loanAmount != null">#{loanAmount},</if>
+            <if test="isDisbursed != null">#{isDisbursed},</if>
+            <if test="bankId != null">#{bankId},</if>
+            <if test="tuitionFee != null">#{tuitionFee},</if>
+            <if test="deductionDate != null">#{deductionDate},</if>
+            <if test="disbursementDate != null">#{disbursementDate},</if>
+            <if test="bankName != null">#{bankName},</if>
+            <if test="designatedAccount != null">#{designatedAccount},</if>
+            <if test="verificationCode != null">#{verificationCode},</if>
+            <if test="idCardNumber != null">#{idCardNumber},</if>
+            <if test="creator != null">#{creator},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updater != null">#{updater},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStuContract" parameterType="StuContract">
+        update stu_contract
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="contractUrl != null">contract_url = #{contractUrl},</if>
+            <if test="academicYear != null">academic_year = #{academicYear},</if>
+            <if test="studentId != null">student_id = #{studentId},</if>
+            <if test="loanAmount != null">loan_amount = #{loanAmount},</if>
+            <if test="isDisbursed != null">is_disbursed = #{isDisbursed},</if>
+            <if test="bankId != null">bank_id = #{bankId},</if>
+            <if test="tuitionFee != null">tuition_fee = #{tuitionFee},</if>
+            <if test="deductionDate != null">deduction_date = #{deductionDate},</if>
+            <if test="disbursementDate != null">disbursement_date = #{disbursementDate},</if>
+            <if test="bankName != null">bank_name = #{bankName},</if>
+            <if test="designatedAccount != null">designated_account = #{designatedAccount},</if>
+            <if test="verificationCode != null">verification_code = #{verificationCode},</if>
+            <if test="idCardNumber != null">id_card_number = #{idCardNumber},</if>
+            <if test="creator != null">creator = #{creator},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updater != null">updater = #{updater},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteStuContractById" parameterType="Long">
+        delete from stu_contract where id = #{id}
+    </delete>
+
+    <delete id="deleteStuContractByIds" parameterType="String">
+        delete from stu_contract where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
