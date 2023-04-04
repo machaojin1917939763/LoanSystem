@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysCustomerMapper">
+    
+    <resultMap type="SysCustomer" id="SysCustomerResult">
+        <result property="customerId"    column="customer_id"    />
+        <result property="name"    column="name"    />
+        <result property="sex"    column="sex"    />
+        <result property="address"    column="address"    />
+        <result property="coBorrowerName"    column="co_borrower_name"    />
+        <result property="classId"    column="class_id"    />
+        <result property="creator"    column="creator"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updater"    column="updater"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectSysCustomerVo">
+        select customer_id, name, sex, address, co_borrower_name, class_id, creator, create_time, updater, update_time from sys_customer
+    </sql>
+
+    <select id="selectSysCustomerList" parameterType="SysCustomer" resultMap="SysCustomerResult">
+        <include refid="selectSysCustomerVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="coBorrowerName != null  and coBorrowerName != ''"> and co_borrower_name like concat('%', #{coBorrowerName}, '%')</if>
+            <if test="classId != null "> and class_id = #{classId}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="updater != null  and updater != ''"> and updater = #{updater}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysCustomerByCustomerId" parameterType="Long" resultMap="SysCustomerResult">
+        <include refid="selectSysCustomerVo"/>
+        where customer_id = #{customerId}
+    </select>
+        
+    <insert id="insertSysCustomer" parameterType="SysCustomer" useGeneratedKeys="true" keyProperty="customerId">
+        insert into sys_customer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="sex != null">sex,</if>
+            <if test="address != null">address,</if>
+            <if test="coBorrowerName != null">co_borrower_name,</if>
+            <if test="classId != null">class_id,</if>
+            <if test="creator != null">creator,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updater != null">updater,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="address != null">#{address},</if>
+            <if test="coBorrowerName != null">#{coBorrowerName},</if>
+            <if test="classId != null">#{classId},</if>
+            <if test="creator != null">#{creator},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updater != null">#{updater},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysCustomer" parameterType="SysCustomer">
+        update sys_customer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="coBorrowerName != null">co_borrower_name = #{coBorrowerName},</if>
+            <if test="classId != null">class_id = #{classId},</if>
+            <if test="creator != null">creator = #{creator},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updater != null">updater = #{updater},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where customer_id = #{customerId}
+    </update>
+
+    <delete id="deleteSysCustomerByCustomerId" parameterType="Long">
+        delete from sys_customer where customer_id = #{customerId}
+    </delete>
+
+    <delete id="deleteSysCustomerByCustomerIds" parameterType="String">
+        delete from sys_customer where customer_id in 
+        <foreach item="customerId" collection="array" open="(" separator="," close=")">
+            #{customerId}
+        </foreach>
+    </delete>
+</mapper>
