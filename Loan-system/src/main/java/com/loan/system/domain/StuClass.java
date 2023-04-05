@@ -24,7 +24,7 @@ public class StuClass extends BaseEntity
 
     /** 所属年级ID */
     @Excel(name = "所属年级ID")
-    private Long gradeId;
+    private String gradeId;
 
     /** 班级总人数 */
     @Excel(name = "班级总人数")
@@ -64,12 +64,12 @@ public class StuClass extends BaseEntity
     {
         return name;
     }
-    public void setGradeId(Long gradeId) 
+    public void setGradeId(String gradeId)
     {
         this.gradeId = gradeId;
     }
 
-    public Long getGradeId() 
+    public String getGradeId()
     {
         return gradeId;
     }

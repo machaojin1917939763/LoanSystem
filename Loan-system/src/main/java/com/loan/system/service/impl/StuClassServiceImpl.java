@@ -2,7 +2,11 @@ package com.loan.system.service.impl;
 
 import java.util.List;
 import com.loan.common.utils.DateUtils;
+import com.loan.system.domain.StuGrade;
+import com.loan.system.mapper.StuGradeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import com.loan.system.mapper.StuClassMapper;
 import com.loan.system.domain.StuClass;
@@ -19,6 +23,8 @@ public class StuClassServiceImpl implements IStuClassService
 {
     @Autowired
     private StuClassMapper stuClassMapper;
+    @Autowired
+    private StuGradeMapper stuGradeMapper;
 
     /**
      * 查询班级管理
@@ -41,7 +47,18 @@ public class StuClassServiceImpl implements IStuClassService
     @Override
     public List<StuClass> selectStuClassList(StuClass stuClass)
     {
-        return stuClassMapper.selectStuClassList(stuClass);
+        List<StuClass> stuClasses = stuClassMapper.selectStuClassList(stuClass);
+        for (StuClass aClass : stuClasses) {
+            String gradeId = aClass.getGradeId();
+            StuGrade stuGrade = stuGradeMapper.selectStuGradeByGradeId(Long.parseLong(gradeId));
+            if (stuGrade!=null){
+                aClass.setGradeId(stuGrade.getName());
+            }else {
+                return null;
+            }
+
+        }
+        return stuClasses;
     }
 
     /**
@@ -54,6 +71,10 @@ public class StuClassServiceImpl implements IStuClassService
     public int insertStuClass(StuClass stuClass)
     {
         stuClass.setCreateTime(DateUtils.getNowDate());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String name = authentication.getName();
+        stuClass.setCreator(name);
+        stuClass.setUpdater(name);
         return stuClassMapper.insertStuClass(stuClass);
     }
 
