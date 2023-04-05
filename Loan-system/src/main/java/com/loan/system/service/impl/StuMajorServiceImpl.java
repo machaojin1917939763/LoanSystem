@@ -4,11 +4,18 @@ import java.util.List;
 import com.loan.common.utils.DateUtils;
 import com.loan.system.domain.StuCollege;
 import com.loan.system.mapper.StuCollegeMapper;
+import com.loan.system.mapper.SysRoleMapper;
+import com.loan.system.mapper.SysUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import com.loan.system.mapper.StuMajorMapper;
 import com.loan.system.domain.StuMajor;
 import com.loan.system.service.IStuMajorService;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * 专业管理Service业务层处理
@@ -24,6 +31,7 @@ public class StuMajorServiceImpl implements IStuMajorService
 
     @Autowired
     private StuCollegeMapper stuCollegeMapper;
+
 
     /**
      * 查询专业管理
@@ -50,7 +58,12 @@ public class StuMajorServiceImpl implements IStuMajorService
         for (StuMajor major : stuMajors) {
             String collegeId = major.getCollegeId();
             StuCollege stuCollege = stuCollegeMapper.selectStuCollegeByCollegeId(Long.parseLong(collegeId));
-            major.setCollegeId(stuCollege.getName());
+            if (stuCollege!=null){
+                major.setCollegeId(stuCollege.getName());
+            }else {
+                return null;
+            }
+
         }
         return stuMajors;
     }
@@ -65,6 +78,10 @@ public class StuMajorServiceImpl implements IStuMajorService
     public int insertStuMajor(StuMajor stuMajor)
     {
         stuMajor.setCreateTime(DateUtils.getNowDate());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String name = authentication.getName();
+        stuMajor.setCreator(name);
+        stuMajor.setUpdater(name);
         return stuMajorMapper.insertStuMajor(stuMajor);
     }
 
