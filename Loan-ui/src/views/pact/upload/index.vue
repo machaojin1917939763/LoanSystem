@@ -1,315 +1,334 @@
 <template>
   <div class="upload">
-    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="活动名称" prop="name">
-        <el-input v-model="ruleForm.name"></el-input>
-      </el-form-item>
-      <el-form-item label="活动区域" prop="region">
-        <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="活动时间" required>
-        <el-col :span="11">
-          <el-form-item prop="date1">
-            <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+    <el-row :gutter="15">
+      <el-form ref="elForm" :model="formData" :rules="rules" size="medium" label-width="100px"
+        label-position="left">
+        <el-col :span="15">
+          <el-row gutter="20">
+            <el-col :span="12">
+              <el-form-item label="客户姓名" prop="fieldname">
+                <el-input v-model="formData.fieldname" placeholder="请输入客户姓名" clearable
+                  prefix-icon='el-icon-user-solid' :style="{width: '100%'}"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="性别" prop="fieldsex">
+                <el-radio-group v-model="formData.fieldsex" size="medium">
+                  <el-radio-button v-for="(item, index) in fieldsexOptions" :key="index" :label="item.value"
+                    :disabled="item.disabled">{{item.label}}</el-radio-button>
+                </el-radio-group>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-col>
+        <el-col :span="15">
+          <el-row gutter="20">
+            <el-col :span="12">
+              <el-form-item label="客户学号" prop="fieldnumber">
+                <el-input v-model="formData.fieldnumber" placeholder="请输入10位客户学号" clearable
+                  prefix-icon='el-icon-bank-card' :style="{width: '100%'}"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="身份证号" prop="fieldsize">
+                <el-input v-model="formData.fieldsize" placeholder="请输入18位身份证号" clearable
+                  prefix-icon='el-icon-bank-card' :style="{width: '100%'}"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-col>
+        <el-col :span="15">
+          <el-row gutter="20">
+            <el-col :span="12">
+              <el-form-item label="所属院系" prop="fieldcollege">
+                <el-select v-model="formData.fieldcollege" placeholder="请选择所属院系" clearable 
+                  :style="{width: '100%'}">
+                  <el-option 
+                  v-for="(item, index) in fieldcollegeptions" 
+                  :key="index" 
+                  :label="item.name"
+                  :value="item.collegeId" 
+                  :disabled="item.disabled">
+                </el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="所属专业" prop="fieldmajor">
+                <el-select v-model="formData.fieldmajor" placeholder="请选择所属专业" clearable
+                  :style="{width: '100%'}">
+                  <el-option v-for="(item, index) in fieldmajorptions" :key="index" :label="item.name"
+                    :value="item.majorId" :disabled="item.disabled"></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="所属年级" prop="fieldgrade">
+                <el-select v-model="formData.fieldgrade" placeholder="请选择所属年级" clearable
+                  :style="{width: '100%'}">
+                  <el-option v-for="(item, index) in fieldgradeptions" :key="index" :label="item.name"
+                    :value="item.gradeId" :disabled="item.disabled"></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="所属班级" prop="fieldclass">
+                <el-select v-model="formData.fieldclass" placeholder="请选择所属班级" clearable
+                  :style="{width: '100%'}">
+                  <el-option v-for="(item, index) in fieldclassptions" :key="index" :label="item.name"
+                    :value="item.classId" :disabled="item.disabled"></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-col>
+        <el-col :span="15">
+          <el-row gutter="20">
+            <el-col :span="12">
+              <el-form-item label="贷款年份" prop="fieldyear">
+                <el-input v-model="formData.fieldyear" placeholder="请输入贷款年份" clearable
+                  prefix-icon='el-icon-edit' :style="{width: '100%'}"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="开户银行" prop="fieldon">
+                <el-input v-model="formData.fieldon" placeholder="请输入开户银行" clearable
+                  prefix-icon='el-icon-edit' :style="{width: '100%'}"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="银行账号" prop="fieldid">
+                <el-input v-model="formData.fieldid" placeholder="请输入银行账号" clearable
+                  prefix-icon='el-icon-edit' :style="{width: '100%'}"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="贷款金额" prop="fieldmoney1">
+                <el-input v-model="formData.fieldmoney1" placeholder="请输入贷款金额" clearable
+                  prefix-icon='el-icon-edit' :style="{width: '100%'}"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="学费金额" prop="fieldmoney2">
+                <el-input v-model="formData.fieldmoney2" placeholder="请输入学费金额" clearable
+                  prefix-icon='el-icon-edit' :style="{width: '100%'}"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-col>
+        <el-col :span="15">
+          <el-row gutter="20">
+            <el-col :span="15">
+              <el-form-item label="合同附件" prop="fieldimage" required>
+                <el-upload ref="fieldimage" :file-list="fieldimagefileList" :action="fieldimageAction"
+                  :before-upload="fieldimageBeforeUpload" list-type="picture-card" accept="image/*">
+                  <i class="el-icon-plus"></i>
+                  <div slot="tip" class="el-upload__tip">只能上传不超过 5MB 的image/*文件</div>
+                </el-upload>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item size="large">
+            <el-button type="primary" @click="submitForm">提交</el-button>
+            <el-button @click="resetForm">重置</el-button>
           </el-form-item>
         </el-col>
-        <el-col class="line" :span="2">-</el-col>
-        <el-col :span="11">
-          <el-form-item prop="date2">
-            <el-time-picker placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
-          </el-form-item>
-        </el-col>
-      </el-form-item>
-      <el-form-item label="即时配送" prop="delivery">
-        <el-switch v-model="ruleForm.delivery"></el-switch>
-      </el-form-item>
-      <el-form-item label="活动性质" prop="type">
-        <el-checkbox-group v-model="ruleForm.type">
-          <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-          <el-checkbox label="地推活动" name="type"></el-checkbox>
-          <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-          <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-        </el-checkbox-group>
-      </el-form-item>
-      <el-form-item label="特殊资源" prop="resource">
-        <el-radio-group v-model="ruleForm.resource">
-          <el-radio label="线上品牌商赞助"></el-radio>
-          <el-radio label="线下场地免费"></el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="活动形式" prop="desc">
-        <el-upload
-          multiple
-          drag
-          :action="uploadFileUrl"
-          :before-upload="handleBeforeUpload"
-          :file-list="fileList"
-          :limit="limit"
-          :on-error="handleUploadError"
-          :on-exceed="handleExceed"
-          :on-success="handleUploadSuccess"
-          :show-file-list="false"
-          :headers="headers"
-          class="upload-file-uploader"
-          ref="fileUpload"
-        >
-          <!-- 上传按钮 -->
-          <i class="el-icon-upload"></i>
-          <!-- 上传提示 -->
-          <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-          <template v-if="fileSize"> 大小不超过 <b style="color: #f56c6c">{{ fileSize }}MB</b> </template>
-          <template v-if="fileType"> 格式为 <b style="color: #f56c6c">{{ fileType.join("/") }}</b> </template>
-          的文件
-        </el-upload>
-
-        <!-- 文件列表 -->
-        <transition-group class="upload-file-list el-upload-list el-upload-list--text" name="el-fade-in-linear" tag="ul">
-          <li :key="file.url" class="el-upload-list__item ele-upload-list__item-content" v-for="(file, index) in fileList">
-            <el-link :href="`${baseUrl}${file.url}`" :underline="false" target="_blank">
-              <span class="el-icon-document"> {{ getFileName(file.name) }} </span>
-            </el-link>
-            <div class="ele-upload-list__item-content-action">
-              <el-link :underline="false" @click="handleDelete(index)" type="danger">删除</el-link>
-            </div>
-          </li>
-        </transition-group>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
-        <el-button @click="resetForm('ruleForm')">重置</el-button>
-      </el-form-item>
-    </el-form>
+      </el-form>
+    </el-row>
   </div>
 </template>
 
 <script>
-import { getToken } from "@/utils/auth";
-
+import { fieldcollegeFun,fieldmajorFun,fieldgradeFun,fieldclassFun } from "@/api/student/upload";
 export default {
-  name: "upload",
-  props: {
-    // 值
-    value: [String, Object, Array],
-    // 数量限制
-    limit: {
-      type: Number,
-      default: 5,
-    },
-    // 大小限制(MB)
-    fileSize: {
-      type: Number,
-      default: 5,
-    },
-    // 文件类型, 例如['png', 'jpg', 'jpeg']
-    fileType: {
-      type: Array,
-      default: () => ["doc", "xls", "ppt", "txt", "pdf"],
-    },
-    // 是否显示提示
-    isShowTip: {
-      type: Boolean,
-      default: true
-    }
-  },
+  components: {},
+  props: [],
   data() {
     return {
-      number: 0,
-      uploadList: [],
-      baseUrl: process.env.VUE_APP_BASE_API,
-      uploadFileUrl: process.env.VUE_APP_BASE_API + "/common/upload", // 上传文件服务器地址
-      headers: {
-        Authorization: "Bearer " + getToken(),
-      },
-      fileList: [],
-      ruleForm: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+      formData: {
+        fieldname: undefined,
+        fieldsex: 1,
+        fieldnumber: undefined,
+        fieldsize: undefined,
+        fieldcollege: undefined,
+        fieldmajor: undefined,
+        fieldgrade: undefined,
+        fieldclass: undefined,
+        fieldyear: undefined,
+        fieldon: undefined,
+        fieldid: undefined,
+        fieldmoney1: undefined,
+        fieldmoney2: undefined,
+        fieldimage: null,
       },
       rules: {
-        name: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ],
-        region: [
-          { required: true, message: '请选择活动区域', trigger: 'change' }
-        ],
-        date1: [
-          { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-        ],
-        date2: [
-          { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
-        ],
-        type: [
-          { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-        ],
-        resource: [
-          { required: true, message: '请选择活动资源', trigger: 'change' }
-        ],
-        desc: [
-          { required: true, message: '请填写活动形式', trigger: 'blur' }
-        ]
-      }
-    };
-  },
-  watch: {
-    value: {
-      handler(val) {
-        if (val) {
-          let temp = 1;
-          // 首先将值转为数组
-          const list = Array.isArray(val) ? val : this.value.split(',');
-          // 然后将数组转为对象数组
-          this.fileList = list.map(item => {
-            if (typeof item === "string") {
-              item = { name: item, url: item };
-            }
-            item.uid = item.uid || new Date().getTime() + temp++;
-            return item;
-          });
-        } else {
-          this.fileList = [];
-          return [];
-        }
+        fieldname: [{
+          required: true,
+          message: '请输入客户姓名',
+          trigger: 'blur'
+        },{
+          pattern: /^[\u4e00-\u9fa5a-zA-Z]+$/,
+          message: '请输入合法姓名',
+          trigger: 'blur'
+        }],
+        fieldsex: [{
+          required: true,
+          message: '性别不能为空',
+          trigger: 'change'
+        }],
+        fieldnumber: [{
+          required: true,
+          message: '请输入10位客户学号',
+          trigger: 'blur'
+        }, {
+          pattern: /^\d{10}$/,
+          message: '请输入合法学号',
+          trigger: 'blur'
+        }],
+        fieldsize: [{
+          required: true,
+          message: '请输入18位身份证号',
+          trigger: 'blur'
+        }, {
+          pattern: /^\d{17}[0-9a-zA-Z]$/,
+          message: '请输入合法身份证号',
+          trigger: 'blur'
+        }],
+        fieldcollege: [{
+          required: true,
+          message: '请选择所属院系',
+          trigger: 'change'
+        }],
+        fieldmajor: [{
+          required: true,
+          message: '请选择所属专业',
+          trigger: 'change'
+        }],
+        fieldgrade: [{
+          required: true,
+          message: '请选择所属年级',
+          trigger: 'change'
+        }],
+        fieldclass: [{
+          required: true,
+          message: '请选择所属班级',
+          trigger: 'change'
+        }],
+        fieldyear: [{
+          required: true,
+          message: '请输入贷款年份',
+          trigger: 'blur'
+        }, {
+          pattern: /^\d{4}$/,
+          message: '请输入合法年份',
+          trigger: 'blur'
+        }],
+        fieldon: [{
+          required: true,
+          message: '请输入开户银行',
+          trigger: 'blur'
+        }],
+        fieldid: [{
+          required: true,
+          message: '请输入银行账号',
+          trigger: 'blur'
+        }, {
+          pattern: /^\d{19}$/,
+          message: '请输入合法账号',
+          trigger: 'blur'
+        }],
+        fieldmoney1: [{
+          required: true,
+          message: '请输入贷款金额',
+          trigger: 'blur'
+        }, {
+          pattern: /^\d{3,6}$/,
+          message: '请输入合法金额',
+          trigger: 'blur'
+        }],
+        fieldmoney2: [{
+          required: true,
+          message: '请输入学费金额',
+          trigger: 'blur'
+        }, {
+          pattern: /^\d{3,6}$/,
+          message: '请输入合法金额',
+          trigger: 'blur'
+        }],
       },
-      deep: true,
-      immediate: true
+      fieldimageAction: 'https://jsonplaceholder.typicode.com/posts/',
+      fieldimagefileList: [],
+      fieldsexOptions: [{
+        "label": "男",
+        "value": 1
+      }, {
+        "label": "女",
+        "value": 2
+      }],
+      fieldcollegeptions: [],
+      fieldmajorptions: [],
+      fieldgradeptions: [],
+      fieldclassptions: [],
     }
   },
-  computed: {
-    // 是否显示提示
-    showTip() {
-      return this.isShowTip && (this.fileType || this.fileSize);
-    },
+  computed: {},
+  watch: {},
+  created() {
+    this.getListCollege()
+    this.getListMajor()
+    this.getListGrade()
+    this.getListClass()
   },
+  mounted() {},
   methods: {
-    // 上传前校检格式和大小
-    handleBeforeUpload(file) {
-      // 校检文件类型
-      if (this.fileType) {
-        const fileName = file.name.split('.');
-        const fileExt = fileName[fileName.length - 1];
-        const isTypeOk = this.fileType.indexOf(fileExt) >= 0;
-        if (!isTypeOk) {
-          this.$modal.msgError(`文件格式不正确, 请上传${this.fileType.join("/")}格式文件!`);
-          return false;
-        }
+    submitForm() {
+      this.$refs['elForm'].validate(valid => {
+        if (!valid) return
+        // TODO 提交表单
+      })
+    },
+    resetForm() {
+      this.$refs['elForm'].resetFields()
+    },
+    fieldimageBeforeUpload(file) {
+      let isRightSize = file.size / 1024 / 1024 < 5
+      if (!isRightSize) {
+        this.$message.error('文件大小超过 5MB')
       }
-      // 校检文件大小
-      if (this.fileSize) {
-        const isLt = file.size / 1024 / 1024 < this.fileSize;
-        if (!isLt) {
-          this.$modal.msgError(`上传文件大小不能超过 ${this.fileSize} MB!`);
-          return false;
-        }
+      let isAccept = new RegExp('image/*').test(file.type)
+      if (!isAccept) {
+        this.$message.error('应该选择image/*类型的文件')
       }
-      this.$modal.loading("正在上传文件，请稍候...");
-      this.number++;
-      return true;
+      return isRightSize && isAccept
     },
-    // 文件个数超出
-    handleExceed() {
-      this.$modal.msgError(`上传文件数量不能超过 ${this.limit} 个!`);
+    getListCollege() {
+      fieldcollegeFun().then(res => {
+        this.fieldcollegeptions = res.rows
+      })
     },
-    // 上传失败
-    handleUploadError(err) {
-      this.$modal.msgError("上传文件失败，请重试");
-      this.$modal.closeLoading()
+    getListGrade() {
+      fieldgradeFun().then(res => {
+        this.fieldgradeptions = res.rows
+      })
     },
-    // 上传成功回调
-    handleUploadSuccess(res, file) {
-      if (res.code === 200) {
-        this.uploadList.push({ name: res.fileName, url: res.fileName });
-        this.uploadedSuccessfully();
-      } else {
-        this.number--;
-        this.$modal.closeLoading();
-        this.$modal.msgError(res.msg);
-        this.$refs.fileUpload.handleRemove(file);
-        this.uploadedSuccessfully();
-      }
+    getListMajor() {
+      fieldmajorFun().then(res => {
+        this.fieldmajorptions = res.rows
+      })
     },
-    // 删除文件
-    handleDelete(index) {
-      this.fileList.splice(index, 1);
-      this.$emit("input", this.listToString(this.fileList));
+    getListClass() {
+      fieldclassFun().then(res => {
+        this.fieldclassptions = res.rows
+      })
     },
-    // 上传结束处理
-    uploadedSuccessfully() {
-      if (this.number > 0 && this.uploadList.length === this.number) {
-        this.fileList = this.fileList.concat(this.uploadList);
-        this.uploadList = [];
-        this.number = 0;
-        this.$emit("input", this.listToString(this.fileList));
-        this.$modal.closeLoading();
-      }
-    },
-    // 获取文件名称
-    getFileName(name) {
-      if (name.lastIndexOf("/") > -1) {
-        return name.slice(name.lastIndexOf("/") + 1);
-      } else {
-        return "";
-      }
-    },
-    // 对象转成指定字符串分隔
-    listToString(list, separator) {
-      let strs = "";
-      separator = separator || ",";
-      for (let i in list) {
-        strs += list[i].url + separator;
-      }
-      return strs != '' ? strs.substr(0, strs.length - 1) : '';
-    },
-    submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert('submit!');
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-      });
-    },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
-    }
-  }
-};
+  },
+}
 </script>
-
 <style scoped lang="scss">
 .upload {
-  //居中显示
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  //边框
-  border: 1px dashed #d9d9d9;
-  border-radius: 6px;
-  //背景
-  background-color: #fafafa;
-  //大小
-  width: 100%;
-  height: 100%;
-  //鼠标样式
-  cursor: pointer;
-  //文字
-  color: #999;
-  font-size: 14px;
-  //图标
-  i {
-    font-size: 28px;
-    color: #999;
-  }
-
+  margin: 0 auto;
+  max-width: 1010px;
 }
 </style>
