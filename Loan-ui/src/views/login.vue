@@ -139,6 +139,8 @@ export default {
             Cookies.set("username", this.loginForm.username, { expires: 30 });
             Cookies.set("password", encrypt(this.loginForm.password), { expires: 30 });
             Cookies.set('rememberMe', this.loginForm.rememberMe, { expires: 30 });
+            console.log("Cookies")
+            console.log(Cookies.get("username"))
           } else {
             Cookies.remove("username");
             Cookies.remove("password");
