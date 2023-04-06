@@ -28,6 +28,7 @@ public class SysRegisterController extends BaseController
     @PostMapping("/register")
     public AjaxResult register(@RequestBody RegisterBody user)
     {
+        System.out.println(user);
         if (!("true".equals(configService.selectConfigByKey("sys.account.registerUser"))))
         {
             return error("当前系统没有开启注册功能！");

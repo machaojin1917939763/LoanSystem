@@ -61,7 +61,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-register-footer">
-      <span>Copyright © 2018-2023 ruoyi.vip All Rights Reserved.</span>
+      <span>Copyright © 生源地贷款管理系统</span>
     </div>
   </div>
 </template>
@@ -86,7 +86,8 @@ export default {
         password: "",
         confirmPassword: "",
         code: "",
-        uuid: ""
+        uuid: "",
+        role: "student"
       },
       registerRules: {
         username: [
@@ -161,15 +162,17 @@ export default {
 }
 
 .register-form {
-  border-radius: 6px;
-  background: #ffffff;
+  //需要浮动到右边
+  float: right;
   width: 400px;
-  padding: 25px 25px 5px 25px;
-  .el-input {
-    height: 38px;
-    input {
-      height: 38px;
-    }
+  height: 400px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 20px 30px;
+  //box-shadow: 0 0 10px #ccc;
+  margin-left: 700px;
+  .el-form-item {
+    margin-bottom: 20px;
   }
   .input-icon {
     height: 39px;
