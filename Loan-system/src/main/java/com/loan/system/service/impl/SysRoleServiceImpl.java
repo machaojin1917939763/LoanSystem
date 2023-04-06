@@ -52,7 +52,7 @@ public class SysRoleServiceImpl implements ISysRoleService
      * @return 角色数据集合信息
      */
     @Override
-    @DataScope(deptAlias = "d")
+//    @DataScope(deptAlias = "d")
     public List<SysRole> selectRoleList(SysRole role)
     {
         return roleMapper.selectRoleList(role);

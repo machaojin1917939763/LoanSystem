@@ -31,6 +31,13 @@ public interface SysUserRoleMapper
     public int deleteUserRole(Long[] ids);
 
     /**
+     * 插入用户角色
+     * @param userRole
+     * @return
+     */
+    public int insertUserRole(@Param("userRole") SysUserRole userRole);
+
+    /**
      * 通过角色ID查询角色使用数量
      * 
      * @param roleId 角色ID

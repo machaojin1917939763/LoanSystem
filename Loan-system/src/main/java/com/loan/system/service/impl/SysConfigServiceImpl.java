@@ -93,7 +93,7 @@ public class SysConfigServiceImpl implements ISysConfigService
         {
             return true;
         }
-        return Convert.toBool(captchaEnabled);
+        return Convert.toBool(captchaEnabled) != null;
     }
 
     /**

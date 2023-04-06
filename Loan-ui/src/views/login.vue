@@ -95,7 +95,7 @@ export default {
       // 验证码开关
       captchaEnabled: false,
       // 注册开关
-      register: false,
+      register: true,
       redirect: undefined
     };
   },

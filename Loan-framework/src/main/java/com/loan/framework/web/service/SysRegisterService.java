@@ -1,5 +1,9 @@
 package com.loan.framework.web.service;
 
+import com.loan.common.core.domain.entity.SysRole;
+import com.loan.system.domain.SysUserRole;
+import com.loan.system.mapper.SysUserRoleMapper;
+import com.loan.system.service.ISysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.loan.common.constant.CacheConstants;
@@ -18,6 +22,8 @@ import com.loan.framework.manager.factory.AsyncFactory;
 import com.loan.system.service.ISysConfigService;
 import com.loan.system.service.ISysUserService;
 
+import java.util.List;
+
 /**
  * 注册校验方法
  * 
@@ -34,6 +40,12 @@ public class SysRegisterService
 
     @Autowired
     private RedisCache redisCache;
+
+    @Autowired
+    private SysUserRoleMapper userRoleService;
+
+    @Autowired
+    private ISysRoleService roleService;
 
     /**
      * 注册
@@ -77,6 +89,17 @@ public class SysRegisterService
         {
             sysUser.setNickName(username);
             sysUser.setPassword(SecurityUtils.encryptPassword(password));
+            //userRoleService---插入学生和角色的关系
+            //roleService---查询学生角色
+            List<SysRole> sysRoles = roleService.selectRoleList(new SysRole());
+            //查询到学生角色的id
+            long studentRoleId = 0;
+            for (SysRole sysRole : sysRoles) {
+                if (sysRole.getRoleName().equals("学生")){
+                    studentRoleId = sysRole.getRoleId();
+                    break;
+                }
+            }
             boolean regFlag = userService.registerUser(sysUser);
             if (!regFlag)
             {
@@ -84,6 +107,14 @@ public class SysRegisterService
             }
             else
             {
+                //查询该学生的信息，添加到角色用户表中
+                if (studentRoleId != 0){
+                    SysUser user = userService.selectUserByUserName(sysUser.getUserName());
+                    SysUserRole userRole = new SysUserRole();
+                    userRole.setRoleId(studentRoleId);
+                    userRole.setUserId(user.getUserId());
+                    userRoleService.insertUserRole(userRole);
+                }
                 AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.REGISTER, MessageUtils.message("user.register.success")));
             }
         }
