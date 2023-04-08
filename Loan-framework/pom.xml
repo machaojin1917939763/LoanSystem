@@ -56,7 +56,7 @@
         <!-- 系统模块-->
         <dependency>
             <groupId>com.machaojin</groupId>
-            <artifactId>Loan-system</artifactId>
+            <artifactId>Loan-window</artifactId>
         </dependency>
 
     </dependencies>

@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="客户姓名" prop="name">
+      <el-form-item label="学生姓名" prop="name">
         <el-input
           v-model="queryParams.name"
-          placeholder="请输入客户姓名"
+          placeholder="请输入学生姓名"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -111,8 +111,8 @@
 
     <el-table v-loading="loading" :data="customerList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="客户信息ID" align="center" prop="customerId" />
-      <el-table-column label="客户姓名" align="center" prop="name" />
+      <el-table-column label="学生信息ID" align="center" prop="customerId" />
+      <el-table-column label="学生姓名" align="center" prop="name" />
       <el-table-column label="性别" align="center" prop="sex" />
       <el-table-column label="学号" align="center" prop="studentId" />
       <el-table-column label="地址" align="center" prop="address" />
@@ -148,11 +148,11 @@
       @pagination="getList"
     />
 
-    <!-- 添加或修改客户信息管理对话框 -->
+    <!-- 添加或修改学生信息管理对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="客户姓名" prop="name">
-          <el-input v-model="form.name" placeholder="请输入客户姓名" />
+        <el-form-item label="学生姓名" prop="name">
+          <el-input v-model="form.name" placeholder="请输入学生姓名" />
         </el-form-item>
         <el-form-item label="学号" prop="studentId">
           <el-input v-model="form.studentId" placeholder="请输入学号" />
@@ -200,7 +200,7 @@ export default {
       showSearch: true,
       // 总条数
       total: 0,
-      // 客户信息管理表格数据
+      // 学生信息管理表格数据
       customerList: [],
       // 弹出层标题
       title: "",
@@ -224,7 +224,7 @@ export default {
       // 表单校验
       rules: {
         name: [
-          { required: true, message: "客户姓名不能为空", trigger: "blur" }
+          { required: true, message: "学生姓名不能为空", trigger: "blur" }
         ],
         classId: [
           { required: true, message: "所属班级ID不能为空", trigger: "blur" }
@@ -236,7 +236,7 @@ export default {
     this.getList();
   },
   methods: {
-    /** 查询客户信息管理列表 */
+    /** 查询学生信息管理列表 */
     getList() {
       this.loading = true;
       listCustomer(this.queryParams).then(response => {
@@ -287,7 +287,7 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加客户信息管理";
+      this.title = "添加学生信息管理";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
@@ -296,7 +296,7 @@ export default {
       getCustomer(customerId).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改客户信息管理";
+        this.title = "修改学生信息管理";
       });
     },
     /** 提交按钮 */
@@ -322,7 +322,7 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const customerIds = row.customerId || this.ids;
-      this.$modal.confirm('是否确认删除客户信息管理编号为"' + customerIds + '"的数据项？').then(function() {
+      this.$modal.confirm('是否确认删除学生信息管理编号为"' + customerIds + '"的数据项？').then(function() {
         return delCustomer(customerIds);
       }).then(() => {
         this.getList();

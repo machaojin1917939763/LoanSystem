@@ -159,7 +159,7 @@
             <!-- 系统模块-->
             <dependency>
                 <groupId>com.machaojin</groupId>
-                <artifactId>Loan-system</artifactId>
+                <artifactId>Loan-window</artifactId>
                 <version>${machaojin.version}</version>
             </dependency>
 
@@ -176,7 +176,7 @@
     <modules>
         <module>Loan-admin</module>
         <module>Loan-framework</module>
-        <module>Loan-system</module>
+        <module>Loan-window</module>
         <module>Loan-quartz</module>
         <module>Loan-generator</module>
         <module>Loan-common</module>
