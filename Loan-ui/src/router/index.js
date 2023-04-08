@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+import store from '@/store';
+import { createRouter, createWebHistory } from 'vue-router';
 Vue.use(Router)
 
 /* Layout */
@@ -27,6 +28,7 @@ import Layout from '@/layout'
     activeMenu: '/system/user'      // 当路由设置了该属性，则会高亮相对应的侧边栏。
   }
  */
+
 
 // 公共路由
 export const constantRoutes = [
@@ -70,7 +72,7 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/index'),
         name: 'Index',
-        meta: { title: '首页', icon: 'dashboard', affix: true }
+        meta: { title: '首页', icon: 'dashboard', affix: true}
       }
     ]
   },
@@ -175,3 +177,5 @@ export default new Router({
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
+
+
