@@ -1,6 +1,5 @@
 import { login, logout, getInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
-
 const user = {
   state: {
     token: getToken(),
@@ -9,6 +8,7 @@ const user = {
     roles: [],
     permissions: []
   },
+
 
   mutations: {
     SET_TOKEN: (state, token) => {
@@ -25,6 +25,9 @@ const user = {
     },
     SET_PERMISSIONS: (state, permissions) => {
       state.permissions = permissions
+    },
+    SET_ROLE: (state, role) => {
+      state.role = role;
     }
   },
 
@@ -39,7 +42,7 @@ const user = {
         login(username, password, code, uuid).then(res => {
           setToken(res.token)
           commit('SET_TOKEN', res.token)
-          resolve()
+          resolve(res.role);
         }).catch(error => {
           reject(error)
         })
