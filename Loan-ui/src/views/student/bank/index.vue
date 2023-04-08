@@ -9,22 +9,6 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="创建人" prop="creator">
-        <el-input
-          v-model="queryParams.creator"
-          placeholder="请输入创建人"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="修改人" prop="updater">
-        <el-input
-          v-model="queryParams.updater"
-          placeholder="请输入修改人"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -80,7 +64,7 @@
     <el-table v-loading="loading" :data="bankList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="银行id" align="center" prop="bankId" />
-      <el-table-column label="银行名字" align="center" prop="bankName" />
+      <el-table-column label="银行名称" align="center" prop="bankName" />
       <el-table-column label="创建人" align="center" prop="creator" />
       <el-table-column label="修改人" align="center" prop="updater" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
@@ -114,14 +98,8 @@
     <!-- 添加或修改银行对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="银行名字" prop="bankName">
+        <el-form-item label="银行名称" prop="bankName">
           <el-input v-model="form.bankName" placeholder="请输入银行名字" />
-        </el-form-item>
-        <el-form-item label="创建人" prop="creator">
-          <el-input v-model="form.creator" placeholder="请输入创建人" />
-        </el-form-item>
-        <el-form-item label="修改人" prop="updater">
-          <el-input v-model="form.updater" placeholder="请输入修改人" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">

@@ -20,7 +20,7 @@ public class StuLoanDisbursementTime extends BaseEntity
 
     /** 学年id */
     @Excel(name = "学年id")
-    private Long academicYearId;
+    private String academicYearId;
 
     /** 创建人 */
     @Excel(name = "创建人")
@@ -39,12 +39,12 @@ public class StuLoanDisbursementTime extends BaseEntity
     {
         return timeId;
     }
-    public void setAcademicYearId(Long academicYearId) 
+    public void setAcademicYearId(String academicYearId)
     {
         this.academicYearId = academicYearId;
     }
 
-    public Long getAcademicYearId() 
+    public String getAcademicYearId()
     {
         return academicYearId;
     }
