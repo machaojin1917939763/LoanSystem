@@ -37,7 +37,7 @@ public class StuContractController extends BaseController
     /**
      * 查询合同信息管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:contract:list')")
+//    @PreAuthorize("@ss.hasPermi('system:contract:list')")
     @GetMapping("/list")
     public TableDataInfo list(StuContract stuContract)
     {
@@ -49,7 +49,7 @@ public class StuContractController extends BaseController
     /**
      * 导出合同信息管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:contract:export')")
+//    @PreAuthorize("@ss.hasPermi('system:contract:export')")
     @Log(title = "合同信息管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, StuContract stuContract)
@@ -62,7 +62,7 @@ public class StuContractController extends BaseController
     /**
      * 获取合同信息管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:contract:query')")
+//    @PreAuthorize("@ss.hasPermi('system:contract:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +72,7 @@ public class StuContractController extends BaseController
     /**
      * 新增合同信息管理
      */
-    @PreAuthorize("@ss.hasPermi('system:contract:add')")
+//    @PreAuthorize("@ss.hasPermi('system:contract:add')")
     @Log(title = "合同信息管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody StuContract stuContract)
@@ -83,7 +83,7 @@ public class StuContractController extends BaseController
     /**
      * 修改合同信息管理
      */
-    @PreAuthorize("@ss.hasPermi('system:contract:edit')")
+//    @PreAuthorize("@ss.hasPermi('system:contract:edit')")
     @Log(title = "合同信息管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody StuContract stuContract)
@@ -94,7 +94,7 @@ public class StuContractController extends BaseController
     /**
      * 删除合同信息管理
      */
-    @PreAuthorize("@ss.hasPermi('system:contract:remove')")
+//    @PreAuthorize("@ss.hasPermi('system:contract:remove')")
     @Log(title = "合同信息管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)

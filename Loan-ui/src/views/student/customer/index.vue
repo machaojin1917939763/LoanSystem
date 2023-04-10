@@ -71,7 +71,6 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['system:customer:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -82,7 +81,6 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['system:customer:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -93,7 +91,6 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['system:customer:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -103,12 +100,10 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['system:customer:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
-
     <el-table v-loading="loading" :data="customerList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="学生信息ID" align="center" prop="customerId" />

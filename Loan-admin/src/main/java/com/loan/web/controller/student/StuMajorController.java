@@ -37,7 +37,7 @@ public class StuMajorController extends BaseController
     /**
      * 查询专业管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:major:list')")
+//    @PreAuthorize("@ss.hasPermi('system:major:list')")
     @GetMapping("/list")
     public TableDataInfo list(StuMajor stuMajor)
     {
@@ -49,7 +49,7 @@ public class StuMajorController extends BaseController
     /**
      * 导出专业管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:major:export')")
+//    @PreAuthorize("@ss.hasPermi('system:major:export')")
     @Log(title = "专业管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, StuMajor stuMajor)
@@ -62,7 +62,7 @@ public class StuMajorController extends BaseController
     /**
      * 获取专业管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:major:query')")
+//    @PreAuthorize("@ss.hasPermi('system:major:query')")
     @GetMapping(value = "/{majorId}")
     public AjaxResult getInfo(@PathVariable("majorId") Long majorId)
     {
@@ -72,7 +72,7 @@ public class StuMajorController extends BaseController
     /**
      * 新增专业管理
      */
-    @PreAuthorize("@ss.hasPermi('system:major:add')")
+//    @PreAuthorize("@ss.hasPermi('system:major:add')")
     @Log(title = "专业管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody StuMajor stuMajor)
@@ -83,7 +83,7 @@ public class StuMajorController extends BaseController
     /**
      * 修改专业管理
      */
-    @PreAuthorize("@ss.hasPermi('system:major:edit')")
+//    @PreAuthorize("@ss.hasPermi('system:major:edit')")
     @Log(title = "专业管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody StuMajor stuMajor)
@@ -94,7 +94,7 @@ public class StuMajorController extends BaseController
     /**
      * 删除专业管理
      */
-    @PreAuthorize("@ss.hasPermi('system:major:remove')")
+//    @PreAuthorize("@ss.hasPermi('system:major:remove')")
     @Log(title = "专业管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{majorIds}")
     public AjaxResult remove(@PathVariable Long[] majorIds)

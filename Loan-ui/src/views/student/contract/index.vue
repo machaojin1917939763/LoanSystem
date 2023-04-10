@@ -135,7 +135,6 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['system:contract:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -146,7 +145,6 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['system:contract:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -157,7 +155,6 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['system:contract:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -167,12 +164,10 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['system:contract:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
-
     <el-table v-loading="loading" :data="contractList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="合同ID" align="center" prop="id" />

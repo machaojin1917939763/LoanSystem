@@ -37,7 +37,7 @@ public class StuCollegeController extends BaseController
     /**
      * 查询学院管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:college:list')")
+//    @PreAuthorize("@ss.hasPermi('system:college:list')")
     @GetMapping("/list")
     public TableDataInfo list(StuCollege stuCollege)
     {
@@ -49,7 +49,7 @@ public class StuCollegeController extends BaseController
     /**
      * 导出学院管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:college:export')")
+//    @PreAuthorize("@ss.hasPermi('system:college:export')")
     @Log(title = "学院管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, StuCollege stuCollege)
@@ -62,7 +62,7 @@ public class StuCollegeController extends BaseController
     /**
      * 获取学院管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:college:query')")
+//    @PreAuthorize("@ss.hasPermi('system:college:query')")
     @GetMapping(value = "/{collegeId}")
     public AjaxResult getInfo(@PathVariable("collegeId") Long collegeId)
     {
@@ -72,7 +72,7 @@ public class StuCollegeController extends BaseController
     /**
      * 新增学院管理
      */
-    @PreAuthorize("@ss.hasPermi('system:college:add')")
+//    @PreAuthorize("@ss.hasPermi('system:college:add')")
     @Log(title = "学院管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody StuCollege stuCollege)
@@ -83,7 +83,7 @@ public class StuCollegeController extends BaseController
     /**
      * 修改学院管理
      */
-    @PreAuthorize("@ss.hasPermi('system:college:edit')")
+//    @PreAuthorize("@ss.hasPermi('system:college:edit')")
     @Log(title = "学院管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody StuCollege stuCollege)
@@ -94,7 +94,7 @@ public class StuCollegeController extends BaseController
     /**
      * 删除学院管理
      */
-    @PreAuthorize("@ss.hasPermi('system:college:remove')")
+//    @PreAuthorize("@ss.hasPermi('system:college:remove')")
     @Log(title = "学院管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{collegeIds}")
     public AjaxResult remove(@PathVariable Long[] collegeIds)

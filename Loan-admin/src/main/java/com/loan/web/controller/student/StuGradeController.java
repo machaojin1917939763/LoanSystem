@@ -37,7 +37,7 @@ public class StuGradeController extends BaseController
     /**
      * 查询年级管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:grade:list')")
+//    @PreAuthorize("@ss.hasPermi('system:grade:list')")
     @GetMapping("/list")
     public TableDataInfo list(StuGrade stuGrade)
     {
@@ -49,7 +49,7 @@ public class StuGradeController extends BaseController
     /**
      * 导出年级管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:grade:export')")
+//    @PreAuthorize("@ss.hasPermi('system:grade:export')")
     @Log(title = "年级管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, StuGrade stuGrade)
@@ -62,7 +62,7 @@ public class StuGradeController extends BaseController
     /**
      * 获取年级管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:grade:query')")
+//    @PreAuthorize("@ss.hasPermi('system:grade:query')")
     @GetMapping(value = "/{gradeId}")
     public AjaxResult getInfo(@PathVariable("gradeId") Long gradeId)
     {
@@ -72,7 +72,7 @@ public class StuGradeController extends BaseController
     /**
      * 新增年级管理
      */
-    @PreAuthorize("@ss.hasPermi('system:grade:add')")
+//    @PreAuthorize("@ss.hasPermi('system:grade:add')")
     @Log(title = "年级管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody StuGrade stuGrade)
@@ -83,7 +83,7 @@ public class StuGradeController extends BaseController
     /**
      * 修改年级管理
      */
-    @PreAuthorize("@ss.hasPermi('system:grade:edit')")
+//    @PreAuthorize("@ss.hasPermi('system:grade:edit')")
     @Log(title = "年级管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody StuGrade stuGrade)
@@ -94,7 +94,7 @@ public class StuGradeController extends BaseController
     /**
      * 删除年级管理
      */
-    @PreAuthorize("@ss.hasPermi('system:grade:remove')")
+//    @PreAuthorize("@ss.hasPermi('system:grade:remove')")
     @Log(title = "年级管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{gradeIds}")
     public AjaxResult remove(@PathVariable Long[] gradeIds)
