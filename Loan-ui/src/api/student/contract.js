@@ -26,6 +26,14 @@ export function addContract(data) {
   })
 }
 
+export function addContractPact(data) {
+  return request({
+    url: '/system/contract/pact',
+    method: 'post',
+    data: data
+  })
+}
+
 // 修改合同信息管理
 export function updateContract(data) {
   return request({

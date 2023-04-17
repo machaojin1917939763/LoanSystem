@@ -37,7 +37,7 @@ public class StuLoanDisbursementTimeController extends BaseController
     /**
      * 查询放款时间列表
      */
-    @PreAuthorize("@ss.hasPermi('system:time:list')")
+//    @PreAuthorize("@ss.hasPermi('system:time:list')")
     @GetMapping("/list")
     public TableDataInfo list(StuLoanDisbursementTime stuLoanDisbursementTime)
     {
@@ -49,7 +49,7 @@ public class StuLoanDisbursementTimeController extends BaseController
     /**
      * 导出放款时间列表
      */
-    @PreAuthorize("@ss.hasPermi('system:time:export')")
+//    @PreAuthorize("@ss.hasPermi('system:time:export')")
     @Log(title = "放款时间", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, StuLoanDisbursementTime stuLoanDisbursementTime)
@@ -62,7 +62,7 @@ public class StuLoanDisbursementTimeController extends BaseController
     /**
      * 获取放款时间详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:time:query')")
+//    @PreAuthorize("@ss.hasPermi('system:time:query')")
     @GetMapping(value = "/{timeId}")
     public AjaxResult getInfo(@PathVariable("timeId") Long timeId)
     {
@@ -72,7 +72,7 @@ public class StuLoanDisbursementTimeController extends BaseController
     /**
      * 新增放款时间
      */
-    @PreAuthorize("@ss.hasPermi('system:time:add')")
+//    @PreAuthorize("@ss.hasPermi('system:time:add')")
     @Log(title = "放款时间", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody StuLoanDisbursementTime stuLoanDisbursementTime)
@@ -83,7 +83,7 @@ public class StuLoanDisbursementTimeController extends BaseController
     /**
      * 修改放款时间
      */
-    @PreAuthorize("@ss.hasPermi('system:time:edit')")
+//    @PreAuthorize("@ss.hasPermi('system:time:edit')")
     @Log(title = "放款时间", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody StuLoanDisbursementTime stuLoanDisbursementTime)
@@ -94,7 +94,7 @@ public class StuLoanDisbursementTimeController extends BaseController
     /**
      * 删除放款时间
      */
-    @PreAuthorize("@ss.hasPermi('system:time:remove')")
+//    @PreAuthorize("@ss.hasPermi('system:time:remove')")
     @Log(title = "放款时间", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{timeIds}")
     public AjaxResult remove(@PathVariable Long[] timeIds)

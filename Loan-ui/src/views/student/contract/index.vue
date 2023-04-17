@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="合同URL" prop="contractUrl">
+      <el-form-item label="合同" prop="contractUrl">
         <el-input
           v-model="queryParams.contractUrl"
-          placeholder="请输入合同URL"
+          placeholder="请输入合同"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -41,10 +41,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="放款银行ID" prop="bankId">
+      <el-form-item label="放款银行" prop="bankId">
         <el-input
           v-model="queryParams.bankId"
-          placeholder="请输入放款银行ID"
+          placeholder="请输入放款银行"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -135,7 +135,6 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['system:contract:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -146,7 +145,6 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['system:contract:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -157,7 +155,6 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['system:contract:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -167,12 +164,10 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['system:contract:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
-
     <el-table v-loading="loading" :data="contractList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="合同ID" align="center" prop="id" />

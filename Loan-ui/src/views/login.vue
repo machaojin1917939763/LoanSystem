@@ -1,9 +1,7 @@
 <template>
   <div class="login">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
-      <div class="login-title">
-        <h2>生源地贷款管理系统</h2>
-      </div>
+      <h2 class="title">生源地贷款管理系统</h2>
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
@@ -54,7 +52,7 @@
           <span v-else>登 录 中...</span>
         </el-button>
         <div style="float: right;" v-if="register">
-          <router-link class="link-type" :to="'/register'">立即注册</router-link>
+          <router-link class="link-type" :to="'/register'">我是学生，立即注册</router-link>
         </div>
       </el-form-item>
     </el-form>
@@ -93,7 +91,7 @@ export default {
       },
       loading: false,
       // 验证码开关
-      captchaEnabled: false,
+      captchaEnabled: true,
       // 注册开关
       register: true,
       redirect: undefined
@@ -146,7 +144,7 @@ export default {
           }
           this.$store.dispatch("Login", this.loginForm).then((role) => {
             if (role === "student"){
-              this.$router.push({path: this.redirect || "/studentRole"}).catch(() => {
+              this.$router.push({path: this.redirect || "/"}).catch(() => {
               });
             }else {
               this.$router.push({path: this.redirect || "/"}).catch(() => {
@@ -213,6 +211,11 @@ export default {
     width: 14px;
     margin-left: 2px;
   }
+}
+.title {
+  margin: 0px auto 30px auto;
+  text-align: center;
+  color: #707070;
 }
 .login-tip {
   font-size: 16px;

@@ -37,7 +37,7 @@ public class StuBankController extends BaseController
     /**
      * 查询银行列表
      */
-    @PreAuthorize("@ss.hasPermi('system:bank:list')")
+//    @PreAuthorize("@ss.hasPermi('system:bank:list')")
     @GetMapping("/list")
     public TableDataInfo list(StuBank stuBank)
     {
@@ -49,7 +49,7 @@ public class StuBankController extends BaseController
     /**
      * 导出银行列表
      */
-    @PreAuthorize("@ss.hasPermi('system:bank:export')")
+//    @PreAuthorize("@ss.hasPermi('system:bank:export')")
     @Log(title = "银行", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, StuBank stuBank)
@@ -62,7 +62,7 @@ public class StuBankController extends BaseController
     /**
      * 获取银行详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:bank:query')")
+//    @PreAuthorize("@ss.hasPermi('system:bank:query')")
     @GetMapping(value = "/{bankId}")
     public AjaxResult getInfo(@PathVariable("bankId") Long bankId)
     {
@@ -72,7 +72,7 @@ public class StuBankController extends BaseController
     /**
      * 新增银行
      */
-    @PreAuthorize("@ss.hasPermi('system:bank:add')")
+//    @PreAuthorize("@ss.hasPermi('system:bank:add')")
     @Log(title = "银行", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody StuBank stuBank)
@@ -83,7 +83,7 @@ public class StuBankController extends BaseController
     /**
      * 修改银行
      */
-    @PreAuthorize("@ss.hasPermi('system:bank:edit')")
+//    @PreAuthorize("@ss.hasPermi('system:bank:edit')")
     @Log(title = "银行", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody StuBank stuBank)
@@ -94,7 +94,7 @@ public class StuBankController extends BaseController
     /**
      * 删除银行
      */
-    @PreAuthorize("@ss.hasPermi('system:bank:remove')")
+//    @PreAuthorize("@ss.hasPermi('system:bank:remove')")
     @Log(title = "银行", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{bankIds}")
     public AjaxResult remove(@PathVariable Long[] bankIds)
