@@ -2,6 +2,8 @@ package com.loan.web.controller.student;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.loan.system.domain.vo.PactVo;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -81,6 +83,19 @@ public class StuContractController extends BaseController
     }
 
     /**
+     * 新增合同信息管理
+     */
+//    @PreAuthorize("@ss.hasPermi('system:contract:add')")
+    @Log(title = "合同信息管理", businessType = BusinessType.INSERT)
+    @PostMapping("/pact")
+    public AjaxResult addPact(@RequestBody PactVo pactVo)
+    {
+//        return toAjax(stuContractService.insertStuContract(stuContract));
+        System.out.println(pactVo);
+        return new AjaxResult();
+    }
+
+    /**
      * 修改合同信息管理
      */
 //    @PreAuthorize("@ss.hasPermi('system:contract:edit')")
@@ -96,7 +111,7 @@ public class StuContractController extends BaseController
      */
 //    @PreAuthorize("@ss.hasPermi('system:contract:remove')")
     @Log(title = "合同信息管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
+    @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(stuContractService.deleteStuContractByIds(ids));

@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="合同URL" prop="contractUrl">
+      <el-form-item label="合同" prop="contractUrl">
         <el-input
           v-model="queryParams.contractUrl"
-          placeholder="请输入合同URL"
+          placeholder="请输入合同"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -41,10 +41,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="放款银行ID" prop="bankId">
+      <el-form-item label="放款银行" prop="bankId">
         <el-input
           v-model="queryParams.bankId"
-          placeholder="请输入放款银行ID"
+          placeholder="请输入放款银行"
           clearable
           @keyup.enter.native="handleQuery"
         />

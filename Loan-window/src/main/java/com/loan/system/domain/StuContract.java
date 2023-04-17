@@ -22,7 +22,7 @@ public class StuContract extends BaseEntity
     private Long id;
 
     /** 合同URL */
-    @Excel(name = "合同URL")
+    @Excel(name = "合同")
     private String contractUrl;
 
     /** 学年 */
