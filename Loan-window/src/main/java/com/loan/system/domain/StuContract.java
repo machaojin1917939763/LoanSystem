@@ -42,7 +42,7 @@ public class StuContract extends BaseEntity
     private Integer isDisbursed;
 
     /** 放款银行ID */
-    @Excel(name = "放款银行ID")
+    @Excel(name = "放款银行")
     private Long bankId;
 
     /** 学费 */

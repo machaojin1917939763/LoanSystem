@@ -1,7 +1,11 @@
 package com.loan.system.service;
 
+import java.text.ParseException;
 import java.util.List;
 import com.loan.system.domain.StuContract;
+import com.loan.system.domain.vo.PactVo;
+
+import javax.servlet.http.Cookie;
 
 /**
  * 合同信息管理Service接口
@@ -58,4 +62,13 @@ public interface IStuContractService
      * @return 结果
      */
     public int deleteStuContractById(Long id);
+
+    /**
+     * 合同上传
+     *
+     * @param pactVo  合同信息
+     * @param cookies
+     * @return 结果
+     */
+    int addContract(PactVo pactVo, Cookie[] cookies) throws ParseException;
 }
