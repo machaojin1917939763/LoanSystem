@@ -87,8 +87,16 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['system:contract:export']"
         >导出</el-button>
+      </el-col>
+      <el-col :span="1.5">
+        <el-button
+          type="primary"
+          plain
+          icon="el-icon-plus"
+          size="mini"
+          @click="handleAdd"
+        >新增</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
@@ -148,6 +156,41 @@
       :limit.sync="queryParams.pageSize"
       @pagination="getList"
     />
+
+  <!-- 添加或修改合同信息管理对话框 -->
+  <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+        <el-form-item label="贷款金额" prop="loanAmount">
+          <el-input v-model="form.loanAmount" placeholder="请输入贷款金额" />
+        </el-form-item>
+        <el-form-item label="学费" prop="tuitionFee">
+          <el-input v-model="form.tuitionFee" placeholder="请输入学费" />
+        </el-form-item>
+        <el-form-item label="银行名称" prop="bankName">
+          <el-input v-model="form.bankName" placeholder="请输入银行名称" />
+        </el-form-item>
+        <el-form-item label="指定账户" prop="designatedAccount">
+          <el-input v-model="form.designatedAccount" placeholder="请输入指定账户" />
+        </el-form-item>
+        <el-form-item label="验证码" prop="verificationCode">
+          <el-input v-model="form.verificationCode" placeholder="请输入验证码" />
+        </el-form-item>
+        <el-form-item label="身份证号" prop="idCardNumber">
+          <el-input v-model="form.idCardNumber" placeholder="请输入身份证号" />
+        </el-form-item>
+        <el-form-item label="上传" prop="field" required>
+          <el-upload ref="field" :file-list="fieldfileList" :action="fieldAction"
+                    :before-upload="fieldBeforeUpload" list-type="picture-card">
+            <i class="el-icon-plus"></i>
+            <div slot="tip" class="el-upload__tip">只能上传不超过 10MB 的文件</div>
+          </el-upload>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitForm">确 定</el-button>
+        <el-button @click="cancel">取 消</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -197,7 +240,21 @@ export default {
         updater: null,
       },
       // 表单参数
-      form: {},
+      form: {
+      //合同上传参数
+      //贷款金额
+      loanAmount: '',
+      //学费
+      tuitionFee: '',
+      //银行名称
+      bankName: '',
+      //指定账号
+      designatedAccount: '',
+      //验证码
+      verificationCode: '',
+      //身份证号
+      idCardNumber: ''
+      },
       // 表单校验
       rules: {
         studentId: [
@@ -274,7 +331,7 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加合同信息管理";
+      this.title = "添加合同信息";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
@@ -293,7 +350,7 @@ export default {
           if (this.form.id != null) {
             updateContract(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
-              this.open = false;
+              this.open = false; 
               this.getList();
             });
           } else {
@@ -305,6 +362,16 @@ export default {
           }
         }
       });
+    },
+    cancel() {
+      this.open = false;
+    },
+    fieldBeforeUpload(file) {
+      const isLt10M = file.size / 1024 / 1024 < 10;
+      if (!isLt10M) {
+        this.$message.error('上传文件大小不能超过 10MB!');
+      }
+      return isLt10M;
     },
     /** 删除按钮操作 */
     handleDelete(row) {

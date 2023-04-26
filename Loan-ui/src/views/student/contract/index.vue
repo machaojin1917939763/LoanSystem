@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="合同URL" prop="contractUrl">
+      <el-form-item label="合同" prop="contractUrl">
         <el-input
           v-model="queryParams.contractUrl"
-          placeholder="请输入合同URL"
+          placeholder="请输入合同"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -41,10 +41,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="放款银行ID" prop="bankId">
+      <el-form-item label="放款银行" prop="bankId">
         <el-input
           v-model="queryParams.bankId"
-          placeholder="请输入放款银行ID"
+          placeholder="请输入放款银行"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -135,7 +135,6 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['system:contract:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -146,7 +145,6 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['system:contract:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -157,7 +155,6 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['system:contract:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -167,21 +164,26 @@
           icon="el-icon-download"
           size="mini"
           @click="handleExport"
-          v-hasPermi="['system:contract:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
-
     <el-table v-loading="loading" :data="contractList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="合同ID" align="center" prop="id" />
-      <el-table-column label="合同URL" align="center" prop="contractUrl" />
+      <el-table-column label="合同下载" align="center" prop="contractUrl">
+          <template slot-scope="scope">
+            <el-button size="mini" @click="downloadFile(scope.row.contractUrl)" type="primary">
+              {{ scope.row.academicYear }}
+            </el-button>
+          </template>
+        </el-table-column>
+      <!-- <el-table-column label="合同URL" align="center" prop="contractUrl" /> -->
       <el-table-column label="学年" align="center" prop="academicYear" />
-      <el-table-column label="学生ID" align="center" prop="studentId" />
+      <el-table-column label="学生姓名" align="center" prop="studentName" />
       <el-table-column label="贷款金额" align="center" prop="loanAmount" />
       <el-table-column label="是否放款" align="center" prop="isDisbursed" />
-      <el-table-column label="放款银行ID" align="center" prop="bankId" />
+      <!-- <el-table-column label="银行名称" align="center" prop="bankId" /> -->
       <el-table-column label="学费" align="center" prop="tuitionFee" />
       <el-table-column label="扣款日期" align="center" prop="deductionDate" width="180">
         <template slot-scope="scope">
@@ -245,9 +247,9 @@
         <el-form-item label="是否放款" prop="isDisbursed">
           <el-input v-model="form.isDisbursed" placeholder="请输入是否放款" />
         </el-form-item>
-        <el-form-item label="放款银行ID" prop="bankId">
+        <!-- <el-form-item label="放款银行ID" prop="bankId">
           <el-input v-model="form.bankId" placeholder="请输入放款银行ID" />
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="学费" prop="tuitionFee">
           <el-input v-model="form.tuitionFee" placeholder="请输入学费" />
         </el-form-item>
@@ -326,9 +328,10 @@ export default {
         contractUrl: null,
         academicYear: null,
         studentId: null,
+        studentName:null,
         loanAmount: null,
         isDisbursed: null,
-        bankId: null,
+        // bankId: null,
         tuitionFee: null,
         deductionDate: null,
         disbursementDate: null,
@@ -343,9 +346,9 @@ export default {
       form: {},
       // 表单校验
       rules: {
-        studentId: [
-          { required: true, message: "学生ID不能为空", trigger: "blur" }
-        ],
+        // studentId: [
+        //   { required: true, message: "学生ID不能为空", trigger: "blur" }
+        // ],
       }
     };
   },

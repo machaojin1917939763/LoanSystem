@@ -1,7 +1,12 @@
 package com.loan.web.controller.student;
 
+import java.text.ParseException;
 import java.util.List;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.loan.system.domain.vo.PactVo;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +42,7 @@ public class StuContractController extends BaseController
     /**
      * 查询合同信息管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:contract:list')")
+//    @PreAuthorize("@ss.hasPermi('system:contract:list')")
     @GetMapping("/list")
     public TableDataInfo list(StuContract stuContract)
     {
@@ -49,7 +54,7 @@ public class StuContractController extends BaseController
     /**
      * 导出合同信息管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:contract:export')")
+//    @PreAuthorize("@ss.hasPermi('system:contract:export')")
     @Log(title = "合同信息管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, StuContract stuContract)
@@ -62,7 +67,7 @@ public class StuContractController extends BaseController
     /**
      * 获取合同信息管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:contract:query')")
+//    @PreAuthorize("@ss.hasPermi('system:contract:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id)
     {
@@ -72,7 +77,7 @@ public class StuContractController extends BaseController
     /**
      * 新增合同信息管理
      */
-    @PreAuthorize("@ss.hasPermi('system:contract:add')")
+//    @PreAuthorize("@ss.hasPermi('system:contract:add')")
     @Log(title = "合同信息管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody StuContract stuContract)
@@ -81,9 +86,22 @@ public class StuContractController extends BaseController
     }
 
     /**
+     * 新增合同信息管理
+     */
+//    @PreAuthorize("@ss.hasPermi('system:contract:add')")
+    @Log(title = "合同信息管理", businessType = BusinessType.INSERT)
+    @PostMapping("/pact")
+    public AjaxResult addPact(@RequestBody PactVo pactVo, HttpServletRequest request) throws ParseException {
+//        return toAjax(stuContractService.insertStuContract(stuContract));
+        System.out.println(pactVo);
+        Cookie[] cookies = request.getCookies();
+        return toAjax(stuContractService.addContract(pactVo,cookies));
+    }
+
+    /**
      * 修改合同信息管理
      */
-    @PreAuthorize("@ss.hasPermi('system:contract:edit')")
+//    @PreAuthorize("@ss.hasPermi('system:contract:edit')")
     @Log(title = "合同信息管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody StuContract stuContract)
@@ -94,9 +112,9 @@ public class StuContractController extends BaseController
     /**
      * 删除合同信息管理
      */
-    @PreAuthorize("@ss.hasPermi('system:contract:remove')")
+//    @PreAuthorize("@ss.hasPermi('system:contract:remove')")
     @Log(title = "合同信息管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
+    @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(stuContractService.deleteStuContractByIds(ids));

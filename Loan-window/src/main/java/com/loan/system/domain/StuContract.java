@@ -22,7 +22,7 @@ public class StuContract extends BaseEntity
     private Long id;
 
     /** 合同URL */
-    @Excel(name = "合同URL")
+    @Excel(name = "合同")
     private String contractUrl;
 
     /** 学年 */
@@ -33,6 +33,10 @@ public class StuContract extends BaseEntity
     @Excel(name = "学生ID")
     private Long studentId;
 
+    /** 学生姓名 */
+    @Excel(name = "学生姓名")
+    private String studentName;
+
     /** 贷款金额 */
     @Excel(name = "贷款金额")
     private BigDecimal loanAmount;
@@ -42,7 +46,7 @@ public class StuContract extends BaseEntity
     private Integer isDisbursed;
 
     /** 放款银行ID */
-    @Excel(name = "放款银行ID")
+    @Excel(name = "放款银行")
     private Long bankId;
 
     /** 学费 */
@@ -228,6 +232,14 @@ public class StuContract extends BaseEntity
         return updater;
     }
 
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -249,6 +261,7 @@ public class StuContract extends BaseEntity
             .append("createTime", getCreateTime())
             .append("updater", getUpdater())
             .append("updateTime", getUpdateTime())
+                .append("studentName",getStudentName())
             .toString();
     }
 }

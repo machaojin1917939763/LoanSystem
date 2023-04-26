@@ -37,7 +37,7 @@ public class StuClassController extends BaseController
     /**
      * 查询班级管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:class:list')")
+//    @PreAuthorize("@ss.hasPermi('system:class:list')")
     @GetMapping("/list")
     public TableDataInfo list(StuClass stuClass)
     {
@@ -49,7 +49,7 @@ public class StuClassController extends BaseController
     /**
      * 导出班级管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:class:export')")
+//    @PreAuthorize("@ss.hasPermi('system:class:export')")
     @Log(title = "班级管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, StuClass stuClass)
@@ -62,7 +62,7 @@ public class StuClassController extends BaseController
     /**
      * 获取班级管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:class:query')")
+//    @PreAuthorize("@ss.hasPermi('system:class:query')")
     @GetMapping(value = "/{classId}")
     public AjaxResult getInfo(@PathVariable("classId") Long classId)
     {
@@ -72,7 +72,7 @@ public class StuClassController extends BaseController
     /**
      * 新增班级管理
      */
-    @PreAuthorize("@ss.hasPermi('system:class:add')")
+//    @PreAuthorize("@ss.hasPermi('system:class:add')")
     @Log(title = "班级管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody StuClass stuClass)
@@ -83,7 +83,7 @@ public class StuClassController extends BaseController
     /**
      * 修改班级管理
      */
-    @PreAuthorize("@ss.hasPermi('system:class:edit')")
+//    @PreAuthorize("@ss.hasPermi('system:class:edit')")
     @Log(title = "班级管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody StuClass stuClass)
@@ -94,7 +94,7 @@ public class StuClassController extends BaseController
     /**
      * 删除班级管理
      */
-    @PreAuthorize("@ss.hasPermi('system:class:remove')")
+//    @PreAuthorize("@ss.hasPermi('system:class:remove')")
     @Log(title = "班级管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{classIds}")
     public AjaxResult remove(@PathVariable Long[] classIds)

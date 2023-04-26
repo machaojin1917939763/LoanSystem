@@ -2,7 +2,7 @@ package com.loan.web.controller.student;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +37,7 @@ public class StuCustomerController extends BaseController
     /**
      * 查询客户信息管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:customer:list')")
+//    @PreAuthorize("@ss.hasPermi('system:customer:list')")
     @GetMapping("/list")
     public TableDataInfo list(StuCustomer stuCustomer)
     {
@@ -49,7 +49,7 @@ public class StuCustomerController extends BaseController
     /**
      * 导出客户信息管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:customer:export')")
+//    @PreAuthorize("@ss.hasPermi('system:customer:export')")
     @Log(title = "客户信息管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, StuCustomer stuCustomer)
@@ -62,7 +62,7 @@ public class StuCustomerController extends BaseController
     /**
      * 获取客户信息管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:customer:query')")
+//    @PreAuthorize("@ss.hasPermi('system:customer:query')")
     @GetMapping(value = "/{customerId}")
     public AjaxResult getInfo(@PathVariable("customerId") Long customerId)
     {
@@ -72,7 +72,7 @@ public class StuCustomerController extends BaseController
     /**
      * 新增客户信息管理
      */
-    @PreAuthorize("@ss.hasPermi('system:customer:add')")
+//    @PreAuthorize("@ss.hasPermi('system:customer:add')")
     @Log(title = "客户信息管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody StuCustomer stuCustomer)
@@ -83,7 +83,7 @@ public class StuCustomerController extends BaseController
     /**
      * 修改客户信息管理
      */
-    @PreAuthorize("@ss.hasPermi('system:customer:edit')")
+//    @PreAuthorize("@ss.hasPermi('system:customer:edit')")
     @Log(title = "客户信息管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody StuCustomer stuCustomer)
@@ -94,7 +94,7 @@ public class StuCustomerController extends BaseController
     /**
      * 删除客户信息管理
      */
-    @PreAuthorize("@ss.hasPermi('system:customer:remove')")
+//    @PreAuthorize("@ss.hasPermi('system:customer:remove')")
     @Log(title = "客户信息管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{customerIds}")
     public AjaxResult remove(@PathVariable Long[] customerIds)
