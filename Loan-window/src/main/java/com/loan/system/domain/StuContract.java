@@ -33,6 +33,10 @@ public class StuContract extends BaseEntity
     @Excel(name = "学生ID")
     private Long studentId;
 
+    /** 学生姓名 */
+    @Excel(name = "学生姓名")
+    private String studentName;
+
     /** 贷款金额 */
     @Excel(name = "贷款金额")
     private BigDecimal loanAmount;
@@ -228,6 +232,14 @@ public class StuContract extends BaseEntity
         return updater;
     }
 
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -249,6 +261,7 @@ public class StuContract extends BaseEntity
             .append("createTime", getCreateTime())
             .append("updater", getUpdater())
             .append("updateTime", getUpdateTime())
+                .append("studentName",getStudentName())
             .toString();
     }
 }

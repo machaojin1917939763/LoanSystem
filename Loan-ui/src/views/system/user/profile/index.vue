@@ -35,6 +35,24 @@
                 <svg-icon icon-class="date" />创建日期
                 <div class="pull-right">{{ user.createTime }}</div>
               </li>
+              <li class="list-group-item">
+                <svg-icon icon-class="date" />创建日期
+                <div class="pull-right">{{ user.createTime }}</div>
+              </li>
+              <li class="list-group-item">
+                <svg-icon icon-class="date" />在校信息
+                <div class="pull-right">
+                  <el-cascader
+                   v-model="selectedValues"
+                   :options="options"
+                   :props="props"
+                   @change="handleChange"
+                   clearable
+                   expand-trigger="hover"
+                   placeholder="请选择"
+                ></el-cascader>
+                </div>
+              </li>
             </ul>
           </div>
         </el-card>
