@@ -1,6 +1,9 @@
 package com.loan.web.controller.student;
 
+import java.text.ParseException;
 import java.util.List;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.loan.system.domain.vo.PactVo;
@@ -88,11 +91,11 @@ public class StuContractController extends BaseController
 //    @PreAuthorize("@ss.hasPermi('system:contract:add')")
     @Log(title = "合同信息管理", businessType = BusinessType.INSERT)
     @PostMapping("/pact")
-    public AjaxResult addPact(@RequestBody PactVo pactVo)
-    {
+    public AjaxResult addPact(@RequestBody PactVo pactVo, HttpServletRequest request) throws ParseException {
 //        return toAjax(stuContractService.insertStuContract(stuContract));
         System.out.println(pactVo);
-        return new AjaxResult();
+        Cookie[] cookies = request.getCookies();
+        return toAjax(stuContractService.addContract(pactVo,cookies));
     }
 
     /**

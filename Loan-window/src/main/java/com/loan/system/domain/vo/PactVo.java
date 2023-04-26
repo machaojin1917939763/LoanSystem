@@ -8,6 +8,16 @@ import java.util.List;
 public class PactVo implements Serializable {
     public static final long SerializableID = 1L;
     private String account;
+
+    public String getLoanAmount() {
+        return loanAmount;
+    }
+
+    public void setLoanAmount(String loanAmount) {
+        this.loanAmount = loanAmount;
+    }
+
+    private String loanAmount;
     private String bank;
     private String banji;
     private String college;

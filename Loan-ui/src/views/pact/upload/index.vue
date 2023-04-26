@@ -120,6 +120,12 @@
                           prefix-icon='el-icon-edit' :style="{width: '100%'}"></el-input>
               </el-form-item>
             </el-col>
+            <el-col :span="12">
+              <el-form-item label="校验码" prop="loanAmount">
+                <el-input v-model="formData.loanAmount" placeholder="请输入校验码" clearable
+                          prefix-icon='el-icon-edit' :style="{width: '100%'}"></el-input>
+              </el-form-item>
+            </el-col>
           </el-row>
         </el-col>
         <el-col :span="15">
