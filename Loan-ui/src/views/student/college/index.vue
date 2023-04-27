@@ -9,10 +9,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="创建人" prop="creator">
+      <el-form-item label="院长" prop="creator">
         <el-input
           v-model="queryParams.creator"
-          placeholder="请输入创建人"
+          placeholder="请输入院长"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -37,14 +37,6 @@
         <el-input
           v-model="queryParams.totalContracts"
           placeholder="请输入上交合同数"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="更新人" prop="updater">
-        <el-input
-          v-model="queryParams.updater"
-          placeholder="请输入更新人"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -100,7 +92,7 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="学院ID" align="center" prop="collegeId" />
       <el-table-column label="学院名称" align="center" prop="name" />
-      <el-table-column label="创建人" align="center" prop="creator" />
+      <el-table-column label="院长" align="center" prop="creator" />
       <el-table-column label="学生人数" align="center" prop="totalStudents" />
       <el-table-column label="贷款人数" align="center" prop="totalBorrowers" />
       <el-table-column label="上交合同数" align="center" prop="totalContracts" />
@@ -139,7 +131,7 @@
         <el-form-item label="学院名称" prop="name">
           <el-input v-model="form.name" placeholder="请输入学院名称" />
         </el-form-item>
-        <el-form-item label="创建人" prop="creator">
+        <el-form-item label="院长" prop="creator">
           <el-input v-model="form.creator" placeholder="请输入创建人" />
         </el-form-item>
         <el-form-item label="学生人数" prop="totalStudents">

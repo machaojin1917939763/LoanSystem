@@ -16,7 +16,7 @@ public class StuMajor extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 专业ID */
-    private Long majorId;
+    private String majorId;
 
     /** 专业名称 */
     @Excel(name = "专业名称")
@@ -46,12 +46,12 @@ public class StuMajor extends BaseEntity
     @Excel(name = "更新人")
     private String updater;
 
-    public void setMajorId(Long majorId) 
+    public void setMajorId(String majorId)
     {
         this.majorId = majorId;
     }
 
-    public Long getMajorId() 
+    public String getMajorId()
     {
         return majorId;
     }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loan.system.mapper.StuUserCostomerMapper">
+    
+    <resultMap type="StuUserCostomer" id="StuUserCostomerResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="studentId"    column="student_id"    />
+    </resultMap>
+
+    <sql id="selectStuUserCostomerVo">
+        select id, user_id, student_id from stu_user_costomer
+    </sql>
+
+    <select id="selectStuUserCostomerList" parameterType="StuUserCostomer" resultMap="StuUserCostomerResult">
+        <include refid="selectStuUserCostomerVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="studentId != null "> and student_id = #{studentId}</if>
+        </where>
+    </select>
+    
+    <select id="selectStuUserCostomerById" parameterType="Long" resultMap="StuUserCostomerResult">
+        <include refid="selectStuUserCostomerVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertStuUserCostomer" parameterType="StuUserCostomer">
+        insert into stu_user_costomer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="studentId != null">student_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="studentId != null">#{studentId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateStuUserCostomer" parameterType="StuUserCostomer">
+        update stu_user_costomer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="studentId != null">student_id = #{studentId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteStuUserCostomerById" parameterType="Long">
+        delete from stu_user_costomer where id = #{id}
+    </delete>
+
+    <delete id="deleteStuUserCostomerByIds" parameterType="String">
+        delete from stu_user_costomer where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

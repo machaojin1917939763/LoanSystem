@@ -11,10 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
         <result property="creator"    column="creator"    />
         <result property="updater"    column="updater"    />
+        <result property="bankId"    column="bank_id"    />
     </resultMap>
 
     <sql id="selectStuLoanDisbursementTimeVo">
-        select time_id, academic_year_id, create_time, update_time, creator, updater from stu_loan_disbursement_time
+        select time_id, academic_year_id, create_time, update_time, creator, updater,bank_id from stu_loan_disbursement_time
     </sql>
 
     <select id="selectStuLoanDisbursementTimeList" parameterType="StuLoanDisbursementTime" resultMap="StuLoanDisbursementTimeResult">

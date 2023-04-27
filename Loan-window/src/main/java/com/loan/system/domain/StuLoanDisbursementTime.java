@@ -25,6 +25,27 @@ public class StuLoanDisbursementTime extends BaseEntity
     /** 创建人 */
     @Excel(name = "创建人")
     private String creator;
+    @Excel(name = "银行")
+    private String bankId;
+
+    public String getBankId() {
+        return bankId;
+    }
+
+    public void setBankId(String bankId) {
+        this.bankId = bankId;
+    }
+
+    @Override
+    public String toString() {
+        return "StuLoanDisbursementTime{" +
+                "timeId=" + timeId +
+                ", academicYearId='" + academicYearId + '\'' +
+                ", creator='" + creator + '\'' +
+                ", bankId='" + bankId + '\'' +
+                ", updater='" + updater + '\'' +
+                '}';
+    }
 
     /** 修改人 */
     @Excel(name = "修改人")
@@ -67,15 +88,4 @@ public class StuLoanDisbursementTime extends BaseEntity
         return updater;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("timeId", getTimeId())
-            .append("academicYearId", getAcademicYearId())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .append("creator", getCreator())
-            .append("updater", getUpdater())
-            .toString();
-    }
 }

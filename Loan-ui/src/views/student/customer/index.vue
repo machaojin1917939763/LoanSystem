@@ -115,6 +115,7 @@
       <el-table-column label="共同借款人身份证号" align="center" prop="coBorrowerNameId" />
       <el-table-column label="所属专业" align="center" prop="majorId" />
       <el-table-column label="所属年级" align="center" prop="gradeId" />
+      <el-table-column label="所属学院" align="center" prop="collegeId" />
       <el-table-column label="电子邮件" align="center" prop="email" />
       <el-table-column label="联系电话" align="center" prop="phone" />
       <el-table-column label="所属班级" align="center" prop="classId" />

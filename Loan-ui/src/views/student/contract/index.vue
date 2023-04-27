@@ -17,10 +17,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="学生ID" prop="studentId">
+      <el-form-item label="姓名" prop="studentId">
         <el-input
           v-model="queryParams.studentId"
-          placeholder="请输入学生ID"
+          placeholder="请输入学生姓名"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -29,14 +29,6 @@
         <el-input
           v-model="queryParams.loanAmount"
           placeholder="请输入贷款金额"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="是否放款" prop="isDisbursed">
-        <el-input
-          v-model="queryParams.isDisbursed"
-          placeholder="请输入是否放款"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -81,18 +73,18 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="指定账户" prop="designatedAccount">
+      <el-form-item label="收款账户" prop="designatedAccount">
         <el-input
           v-model="queryParams.designatedAccount"
-          placeholder="请输入指定账户"
+          placeholder="请输入收款账户"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="验证码" prop="verificationCode">
+      <el-form-item label="校验码" prop="verificationCode">
         <el-input
           v-model="queryParams.verificationCode"
-          placeholder="请输入验证码"
+          placeholder="请输入校验码"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -101,22 +93,6 @@
         <el-input
           v-model="queryParams.idCardNumber"
           placeholder="请输入身份证号"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="创建人" prop="creator">
-        <el-input
-          v-model="queryParams.creator"
-          placeholder="请输入创建人"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="更新人" prop="updater">
-        <el-input
-          v-model="queryParams.updater"
-          placeholder="请输入更新人"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -280,12 +256,6 @@
         </el-form-item>
         <el-form-item label="身份证号" prop="idCardNumber">
           <el-input v-model="form.idCardNumber" placeholder="请输入身份证号" />
-        </el-form-item>
-        <el-form-item label="创建人" prop="creator">
-          <el-input v-model="form.creator" placeholder="请输入创建人" />
-        </el-form-item>
-        <el-form-item label="更新人" prop="updater">
-          <el-input v-model="form.updater" placeholder="请输入更新人" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">

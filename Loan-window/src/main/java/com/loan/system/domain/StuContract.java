@@ -23,7 +23,11 @@ public class StuContract extends BaseEntity
 
     /** 合同URL */
     @Excel(name = "合同")
+
     private String contractUrl;
+
+    @Excel(name = "校验码")
+    private String codeUrl;
 
     /** 学年 */
     @Excel(name = "学年")
@@ -43,7 +47,7 @@ public class StuContract extends BaseEntity
 
     /** 是否放款 */
     @Excel(name = "是否放款")
-    private Integer isDisbursed;
+    private String isDisbursed;
 
     /** 放款银行ID */
     @Excel(name = "放款银行")
@@ -92,7 +96,15 @@ public class StuContract extends BaseEntity
         this.id = id;
     }
 
-    public Long getId() 
+    public String getCodeUrl() {
+        return codeUrl;
+    }
+
+    public void setCodeUrl(String codeUrl) {
+        this.codeUrl = codeUrl;
+    }
+
+    public Long getId()
     {
         return id;
     }
@@ -132,12 +144,12 @@ public class StuContract extends BaseEntity
     {
         return loanAmount;
     }
-    public void setIsDisbursed(Integer isDisbursed) 
+    public void setIsDisbursed(String isDisbursed)
     {
         this.isDisbursed = isDisbursed;
     }
 
-    public Integer getIsDisbursed() 
+    public String getIsDisbursed()
     {
         return isDisbursed;
     }
@@ -242,26 +254,25 @@ public class StuContract extends BaseEntity
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("contractUrl", getContractUrl())
-            .append("academicYear", getAcademicYear())
-            .append("studentId", getStudentId())
-            .append("loanAmount", getLoanAmount())
-            .append("isDisbursed", getIsDisbursed())
-            .append("bankId", getBankId())
-            .append("tuitionFee", getTuitionFee())
-            .append("deductionDate", getDeductionDate())
-            .append("disbursementDate", getDisbursementDate())
-            .append("bankName", getBankName())
-            .append("designatedAccount", getDesignatedAccount())
-            .append("verificationCode", getVerificationCode())
-            .append("idCardNumber", getIdCardNumber())
-            .append("creator", getCreator())
-            .append("createTime", getCreateTime())
-            .append("updater", getUpdater())
-            .append("updateTime", getUpdateTime())
-                .append("studentName",getStudentName())
-            .toString();
+        return "StuContract{" +
+                "id=" + id +
+                ", contractUrl='" + contractUrl + '\'' +
+                ", codeUrl='" + codeUrl + '\'' +
+                ", academicYear='" + academicYear + '\'' +
+                ", studentId=" + studentId +
+                ", studentName='" + studentName + '\'' +
+                ", loanAmount=" + loanAmount +
+                ", isDisbursed='" + isDisbursed + '\'' +
+                ", bankId=" + bankId +
+                ", tuitionFee=" + tuitionFee +
+                ", deductionDate=" + deductionDate +
+                ", disbursementDate=" + disbursementDate +
+                ", bankName='" + bankName + '\'' +
+                ", designatedAccount='" + designatedAccount + '\'' +
+                ", verificationCode='" + verificationCode + '\'' +
+                ", idCardNumber='" + idCardNumber + '\'' +
+                ", creator='" + creator + '\'' +
+                ", updater='" + updater + '\'' +
+                '}';
     }
 }
