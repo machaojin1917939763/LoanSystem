@@ -1,36 +1,11 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="学年id" prop="academicYearId">
-        <el-input
-          v-model="queryParams.academicYearId"
-          placeholder="请输入学年id"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="创建人" prop="creator">
-        <el-input
-          v-model="queryParams.creator"
-          placeholder="请输入创建人"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="修改人" prop="updater">
-        <el-input
-          v-model="queryParams.updater"
-          placeholder="请输入修改人"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
-
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
@@ -74,8 +49,9 @@
     </el-row>
     <el-table v-loading="loading" :data="timeList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="时间id" align="center" prop="timeId" />
-      <el-table-column label="学年id" align="center" prop="academicYearId" />
+      <el-table-column label="id" align="center" prop="timeId" />
+      <el-table-column label="学年" align="center" prop="academicYearId" />
+      <el-table-column label="银行" align="center" prop="bankId" />
       <el-table-column label="创建人" align="center" prop="creator" />
       <el-table-column label="修改人" align="center" prop="updater" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">

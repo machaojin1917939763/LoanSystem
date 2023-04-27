@@ -23,10 +23,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="updater"    column="updater"    />
         <result property="updateTime"    column="update_time"    />
+        <result property="codeUrl"    column="code_url"    />
     </resultMap>
 
     <sql id="selectStuContractVo">
-        select id, contract_url, academic_year, student_id, loan_amount, is_disbursed, bank_id, tuition_fee, deduction_date, disbursement_date, bank_name, designated_account, verification_code, id_card_number, creator, create_time, updater, update_time from stu_contract
+        select id, contract_url, academic_year, student_id, loan_amount, is_disbursed, bank_id, tuition_fee, deduction_date, disbursement_date, bank_name, designated_account, verification_code, id_card_number, creator, create_time, updater, update_time,code_url from stu_contract
     </sql>
 
     <select id="selectStuContractList" parameterType="StuContract" resultMap="StuContractResult">

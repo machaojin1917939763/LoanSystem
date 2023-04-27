@@ -97,7 +97,7 @@
       <el-table-column label="专业总人数" align="center" prop="totalStudents" />
       <el-table-column label="贷款总人数" align="center" prop="totalBorrowers" />
       <el-table-column label="上交合同数" align="center" prop="totalContracts" />
-      <el-table-column label="创建人" align="center" prop="creator" />
+      <el-table-column label="负责人" align="center" prop="creator" />
       <el-table-column label="更新人" align="center" prop="updater" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">

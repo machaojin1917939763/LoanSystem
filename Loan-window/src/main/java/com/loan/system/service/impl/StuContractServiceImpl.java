@@ -146,7 +146,7 @@ public class StuContractServiceImpl implements IStuContractService
         SysUser sysUser = sysUserService.selectUserByUserName(username);
         stuContract.setStudentId(sysUser.getUserId());
         stuContract.setLoanAmount(new BigDecimal(pactVo.getMoney()));
-        stuContract.setIsDisbursed(1);
+        stuContract.setIsDisbursed("否");
         StuBank stuBank = bankMapper.selectStuBankByBankId(Long.parseLong(pactVo.getBank()));
         stuContract.setBankId(stuBank.getBankId());
         stuContract.setBankName(stuBank.getBankName());

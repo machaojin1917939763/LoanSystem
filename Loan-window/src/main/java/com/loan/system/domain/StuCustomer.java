@@ -44,9 +44,9 @@ public class StuCustomer extends BaseEntity
 
     /** 所属班级ID */
     @Excel(name = "所属班级ID")
-    private Long classId;
+    private String classId;
     @Excel(name = "所属学院")
-    private Long collegeId;
+    private String collegeId;
 
     /** 创建人 */
     @Excel(name = "创建人")
@@ -64,7 +64,7 @@ public class StuCustomer extends BaseEntity
         return email;
     }
 
-    public Long getCollegeId() {
+    public String getCollegeId() {
         return collegeId;
     }
 
@@ -90,7 +90,7 @@ public class StuCustomer extends BaseEntity
                 '}';
     }
 
-    public void setCollegeId(Long collegeId) {
+    public void setCollegeId(String collegeId) {
         this.collegeId = collegeId;
     }
 
@@ -197,12 +197,12 @@ public class StuCustomer extends BaseEntity
     {
         return coBorrowerName;
     }
-    public void setClassId(Long classId) 
+    public void setClassId(String classId)
     {
         this.classId = classId;
     }
 
-    public Long getClassId() 
+    public String getClassId()
     {
         return classId;
     }

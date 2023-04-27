@@ -1,9 +1,11 @@
 package com.loan.framework.web.service;
 
 import com.loan.common.core.domain.entity.SysRole;
+import com.loan.system.domain.StuCustomer;
+import com.loan.system.domain.StuUserCostomer;
 import com.loan.system.domain.SysUserRole;
 import com.loan.system.mapper.SysUserRoleMapper;
-import com.loan.system.service.ISysRoleService;
+import com.loan.system.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.loan.common.constant.CacheConstants;
@@ -19,8 +21,7 @@ import com.loan.common.utils.SecurityUtils;
 import com.loan.common.utils.StringUtils;
 import com.loan.framework.manager.AsyncManager;
 import com.loan.framework.manager.factory.AsyncFactory;
-import com.loan.system.service.ISysConfigService;
-import com.loan.system.service.ISysUserService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -47,9 +48,16 @@ public class SysRegisterService
     @Autowired
     private ISysRoleService roleService;
 
+    @Autowired
+    private IStuUserCostomerService userCostomerService;
+
+    @Autowired
+    private IStuCustomerService stuCustomerService;
+
     /**
      * 注册
      */
+    @Transactional(rollbackFor = Exception.class)
     public String register(RegisterBody registerBody)
     {
         String msg = "", username = registerBody.getUsername(), password = registerBody.getPassword();
@@ -101,6 +109,19 @@ public class SysRegisterService
                 }
             }
             boolean regFlag = userService.registerUser(sysUser);
+            //添加关系表
+            StuCustomer stuCustomer = new StuCustomer();
+            stuCustomer.setName(sysUser.getUserName());
+
+            stuCustomerService.insertStuCustomer(stuCustomer);
+
+            StuUserCostomer stuUserCostomer = new StuUserCostomer();
+
+            stuUserCostomer.setStudentId(stuCustomer.getCustomerId());
+            stuUserCostomer.setUserId(sysUser.getUserId());
+
+            userCostomerService.insertStuUserCostomer(stuUserCostomer);
+
             if (!regFlag)
             {
                 msg = "注册失败,请联系系统管理人员";

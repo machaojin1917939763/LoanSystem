@@ -19,7 +19,7 @@
            <div class="info-label">性别:</div>
             <el-select v-model="from.sex" placeholder="请选择性别" >
               <el-option
-                    v-for="item in from.options"
+                    v-for="item in options"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value">
@@ -127,7 +127,9 @@
           </div>
         </div>
         <div slot="footer" class="dialog-footer" style="margin: 0 auto">
-            <el-button type="primary" @click="submitForm">确 定</el-button>
+            <el-button type="primary" @click="submitForm" v-show="this.isEdit == null">确 定</el-button>
+            <el-button type="primary" @click="submitForm" disabled v-show="this.isEdit != null">确 定</el-button>
+            <el-button type="primary" @click="changgeEdit" >编辑</el-button>
         </div>
     </div>
 </div>
@@ -261,7 +263,7 @@ li {
 
 <script>
 import {fieldcollegeFun, fieldmajorFun, fieldgradeFun, fieldclassFun} from "@/api/student/upload";
-import {addCustomer, getCustomer, listCustomer,getCustomerOnThis} from "@/api/student/customer";
+import {addCustomer, getCustomer, listCustomer, getCustomerOnThis, updateCustomer} from "@/api/student/customer";
 export default {
   name: 'Profile',
   data() {
@@ -280,19 +282,21 @@ export default {
         idCard:'',
         coBorrowerName:'',
         coBorrowerNameId:'',
-        options: [{
-          value: '1',
-          label: '男'
         },
-          {
-            value: '2',
-            label: '女'
-          }],},
+      isEdit: null,
       avatar: "https://local-imge.oss-cn-beijing.aliyuncs.com/images/%E5%A4%B4%E5%83%8F.jpg",
       collegeOptions: [],
       majorOptions: [],
       gradeOptions: [],
       classOptions: [],
+      options: [{
+        value: '1',
+        label: '男'
+      },
+        {
+          value: '2',
+          label: '女'
+        }],
     };
   },
   created() {
@@ -305,25 +309,30 @@ export default {
   methods: {
     submitForm() {
       // 使用axios库向后端API发送表单数据
-      addCustomer(this.from)
-        .then(() => {
-          $.message().success("信息新增成功")
-
+      updateCustomer(this.from)
+        .then((res) => {
+          this.$modal.msgSuccess("修改成功");
+          this.isEdit = this.from.idCard
         })
         .catch((error) => {
-          $.message().success("信息新增成功")
+          this.$modal.msgSuccess("修改失败");
+          this.isEdit = null
         });
+    },
+    changgeEdit(){
+      this.isEdit = null;
     },
     getStudent() {
       //获取cookie
       getCustomerOnThis()
         .then((res) => {
-          console.log(res)
           this.from = res.data;
+          if (this.form.idCard != null){
+            this.isEdit = this.form.idCard;
+          }
           this.collegeOptions.forEach((value)=>{
             if (value.id === this.form.collegeId){
               this.form.collegeId = value.name;
-              console.log(value)
             }
           })
 

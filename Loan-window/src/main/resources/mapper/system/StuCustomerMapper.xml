@@ -63,6 +63,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="coBorrowerName != null">co_borrower_name,</if>
             <if test="classId != null">class_id,</if>
             <if test="creator != null">creator,</if>
+
+            <if test="email != null">email,</if>
+            <if test="phone != null">phone,</if>
+            <if test="gradeId != null">grade_id,</if>
+            <if test="majorId != null">major_id,</if>
+            <if test="idCard != null">id_card,</if>
+            <if test="coBorrowerNameId != null">co_borrower_name_id,</if>
+            <if test="collegeId != null">college_id,</if>
+
+
             <if test="createTime != null">create_time,</if>
             <if test="updater != null">updater,</if>
             <if test="updateTime != null">update_time,</if>
@@ -75,6 +85,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="coBorrowerName != null">#{coBorrowerName},</if>
             <if test="classId != null">#{classId},</if>
             <if test="creator != null">#{creator},</if>
+
+
+            <if test="email != null">#{email},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="gradeId != null">#{grade_id},</if>
+            <if test="majorId != null">#{major_id},</if>
+            <if test="idCard != null">#{id_card},</if>
+            <if test="coBorrowerNameId != null">#{co_borrower_name_id},</if>
+            <if test="collegeId != null">#{college_id},</if>
+
+
             <if test="createTime != null">#{createTime},</if>
             <if test="updater != null">#{updater},</if>
             <if test="updateTime != null">#{updateTime},</if>
@@ -91,6 +112,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="coBorrowerName != null">co_borrower_name = #{coBorrowerName},</if>
             <if test="classId != null">class_id = #{classId},</if>
             <if test="creator != null">creator = #{creator},</if>
+
+
+            <if test="email != null">email = #{email},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="gradeId != null">grade_id = #{gradeId},</if>
+            <if test="majorId != null">major_id = #{majorId},</if>
+            <if test="idCard != null">id_card = #{idCard},</if>
+            <if test="coBorrowerNameId != null">co_borrower_name_id = #{coBorrowerNameId},</if>
+            <if test="collegeId != null">college_id = #{collegeId},</if>
+
+
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updater != null">updater = #{updater},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>

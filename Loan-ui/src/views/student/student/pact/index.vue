@@ -106,10 +106,17 @@
         <el-table-column label="合同下载" align="center" prop="contractUrl">
           <template slot-scope="scope">
             <el-button size="mini" @click="downloadFile(scope.row.contractUrl)" type="primary">
-              {{ scope.row.academicYear }}
+              合同
             </el-button>
           </template>
         </el-table-column>
+      <el-table-column label="受理证明下载" align="center" prop="contractUrl">
+        <template slot-scope="scope">
+          <el-button size="mini" @click="downloadFile(scope.row.codeUrl)" type="primary">
+            受理证明
+          </el-button>
+        </template>
+      </el-table-column>
       <el-table-column label="学年" align="center" prop="academicYear" />
       <el-table-column label="贷款金额" align="center" prop="loanAmount" />
       <el-table-column label="是否放款" align="center" prop="isDisbursed" />
@@ -136,14 +143,12 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:contract:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['system:contract:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -282,11 +287,6 @@ export default {
       link.href = file;
       link.click();
     },
-    // 取消按钮
-    cancel() {
-      this.open = false;
-      this.reset();
-    },
     // 表单重置
     reset() {
       this.form = {
@@ -350,7 +350,7 @@ export default {
           if (this.form.id != null) {
             updateContract(this.form).then(response => {
               this.$modal.msgSuccess("修改成功");
-              this.open = false; 
+              this.open = false;
               this.getList();
             });
           } else {
