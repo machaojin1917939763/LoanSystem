@@ -58,4 +58,6 @@ public interface IStuCustomerService
      * @return 结果
      */
     public int deleteStuCustomerByCustomerId(Long customerId);
+
+    StuCustomer selectStuCustomerOnThis(String username);
 }

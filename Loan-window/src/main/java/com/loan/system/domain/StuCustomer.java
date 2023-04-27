@@ -37,10 +37,16 @@ public class StuCustomer extends BaseEntity
     /** 共同借款人姓名 */
     @Excel(name = "共同借款人姓名")
     private String coBorrowerName;
+    @Excel(name = "共同借款人身份证号")
+    private String coBorrowerNameId;
+    @Excel(name = "身份证号")
+    private String idCard;
 
     /** 所属班级ID */
     @Excel(name = "所属班级ID")
     private Long classId;
+    @Excel(name = "所属学院")
+    private Long collegeId;
 
     /** 创建人 */
     @Excel(name = "创建人")
@@ -49,6 +55,93 @@ public class StuCustomer extends BaseEntity
     /** 更新人 */
     @Excel(name = "更新人")
     private String updater;
+    @Excel(name = "电子邮件")
+    private String email;
+    @Excel(name = "电话号码")
+    private String phone;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Long getCollegeId() {
+        return collegeId;
+    }
+
+    @Override
+    public String toString() {
+        return "StuCustomer{" +
+                "customerId=" + customerId +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", studentId='" + studentId + '\'' +
+                ", address='" + address + '\'' +
+                ", coBorrowerName='" + coBorrowerName + '\'' +
+                ", coBorrowerNameId='" + coBorrowerNameId + '\'' +
+                ", idCard='" + idCard + '\'' +
+                ", classId=" + classId +
+                ", collegeId=" + collegeId +
+                ", creator='" + creator + '\'' +
+                ", updater='" + updater + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", gradeId='" + gradeId + '\'' +
+                ", majorId='" + majorId + '\'' +
+                '}';
+    }
+
+    public void setCollegeId(Long collegeId) {
+        this.collegeId = collegeId;
+    }
+
+    public String getCoBorrowerNameId() {
+        return coBorrowerNameId;
+    }
+
+    public void setCoBorrowerNameId(String coBorrowerNameId) {
+        this.coBorrowerNameId = coBorrowerNameId;
+    }
+
+    public String getIdCard() {
+        return idCard;
+    }
+
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getGradeId() {
+        return gradeId;
+    }
+
+    public void setGradeId(String gradeId) {
+        this.gradeId = gradeId;
+    }
+
+    public String getMajorId() {
+        return majorId;
+    }
+
+    public void setMajorId(String majorId) {
+        this.majorId = majorId;
+    }
+
+    @Excel(name = "年级id")
+    private String gradeId;
+    @Excel(name = "专业id")
+    private String majorId;
 
     public void setCustomerId(Long customerId) 
     {
@@ -132,20 +225,4 @@ public class StuCustomer extends BaseEntity
         return updater;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("customerId", getCustomerId())
-            .append("name", getName())
-            .append("sex", getSex())
-            .append("studentId", getStudentId())
-            .append("address", getAddress())
-            .append("coBorrowerName", getCoBorrowerName())
-            .append("classId", getClassId())
-            .append("creator", getCreator())
-            .append("createTime", getCreateTime())
-            .append("updater", getUpdater())
-            .append("updateTime", getUpdateTime())
-            .toString();
-    }
 }

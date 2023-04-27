@@ -93,4 +93,9 @@ public class StuCustomerServiceImpl implements IStuCustomerService
     {
         return stuCustomerMapper.deleteStuCustomerByCustomerId(customerId);
     }
+
+    @Override
+    public StuCustomer selectStuCustomerOnThis(String username) {
+        return stuCustomerMapper.selectStuCustomerOnThis(username);
+    }
 }

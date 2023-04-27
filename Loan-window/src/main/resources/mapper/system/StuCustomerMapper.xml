@@ -11,15 +11,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="studentId"    column="student_id"    />
         <result property="address"    column="address"    />
         <result property="coBorrowerName"    column="co_borrower_name"    />
+        <result property="coBorrowerNameId"    column="co_borrower_name_id"    />
         <result property="classId"    column="class_id"    />
         <result property="creator"    column="creator"    />
         <result property="createTime"    column="create_time"    />
         <result property="updater"    column="updater"    />
         <result property="updateTime"    column="update_time"    />
+        <result property="email"    column="email"    />
+        <result property="phone"    column="phone"    />
+        <result property="majorId"    column="major_id"    />
+        <result property="gradeId"    column="grade_id"    />
+        <result property="idCard"    column="id_card"    />
+        <result property="collegeId"    column="college_id"    />
     </resultMap>
 
     <sql id="selectStuCustomerVo">
-        select customer_id, name, sex, student_id, address, co_borrower_name, class_id, creator, create_time, updater, update_time from stu_customer
+        select customer_id, name, sex, student_id, address, co_borrower_name, class_id, creator, create_time, updater, update_time,email,phone,grade_id,major_id,id_card, co_borrower_name_id,college_id from stu_customer
     </sql>
 
     <select id="selectStuCustomerList" parameterType="StuCustomer" resultMap="StuCustomerResult">
@@ -40,7 +47,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectStuCustomerVo"/>
         where customer_id = #{customerId}
     </select>
-        
+
+    <select id="selectStuCustomerOnThis" parameterType="String" resultMap="StuCustomerResult">
+        <include refid="selectStuCustomerVo"/>
+        where name = #{username}
+    </select>
+
     <insert id="insertStuCustomer" parameterType="StuCustomer" useGeneratedKeys="true" keyProperty="customerId">
         insert into stu_customer
         <trim prefix="(" suffix=")" suffixOverrides=",">

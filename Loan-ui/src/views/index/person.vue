@@ -1,62 +1,65 @@
 
-<template> 
-<div class="profile"> 
-  <div class="header"> 
-    <div class="avatar"> <img :src="avatar" alt="avatar"> </div> 
-  </div> 
-        <div class="info-container"> 
-          <form @submit.prevent="submit">
-          <div class="info-row"> 
-            <div class="info-label">昵称:</div> 
-            <div class="info-value">
-              <!-- <input type="text" v-model="nickName" /> -->
-              <el-input
-                v-model="nickName"
-                placeholder="请输入昵称"
-                clearable
-                @keyup.enter.native="handleQuery"
-              />
-           </div> 
-       </div> 
-        <div class="info-row"> 
-          <div class="info-label">类型:</div> 
-          <div class="info-value">
-            <!-- <input type="text" v-model="userType" /> -->
-            <el-input
-              v-model="userType"
-              placeholder="请输入类型"
-              clearable
-              @keyup.enter.native="handleQuery"
-            />
-          </div> 
-        </div> 
+<template>
+<div class="profile">
+  <div class="header">
+    <div class="avatar"> <img :src="avatar" alt="avatar"> </div>
+  </div>
+        <div class="info-container">
         <div class="info-row">
-           <div class="info-label">姓名:</div> 
+           <div class="info-label">姓名:</div>
            <div class="info-value">
-            <!-- <input type="text" v-model="userName" /> -->
             <el-input
-              v-model="userName"
+              v-model="from.name"
               placeholder="请输入姓名"
               clearable
-              @keyup.enter.native="handleQuery"
             />
-           </div> 
-        </div> 
+           </div>
+        </div>
         <div class="info-row">
-           <div class="info-label">性别:</div> 
-            <el-select v-model="selectedSex" placeholder="请选择性别" >
+           <div class="info-label">性别:</div>
+            <el-select v-model="from.sex" placeholder="请选择性别" >
               <el-option
-                    v-for="item in options"
+                    v-for="item in from.options"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value">
-                  </el-option> 
+                  </el-option>
             </el-select>
-        </div> 
+        </div>
+          <div class="info-row">
+            <div class="info-label">身份证号:</div>
+            <div class="info-value">
+              <el-input
+                v-model="from.idCard"
+                placeholder="请输入身份证号"
+                clearable
+              />
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">共同借款人姓名:</div>
+            <div class="info-value">
+              <el-input
+                v-model="from.coBorrowerName"
+                placeholder="请输入共同借款人姓名"
+                clearable
+              />
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">共同借款人身份证号:</div>
+            <div class="info-value">
+              <el-input
+                v-model="from.coBorrowerNameId"
+                placeholder="请输入共同借款人身份证号"
+                clearable
+              />
+            </div>
+          </div>
         <div class="info-row">
           <div class="info-label">所属学院:</div>
           <div class="info-value" >
-            <el-select v-model="selectedCollege" placeholder="请选择所属学院">
+            <el-select v-model="from.collegeId" placeholder="请选择所属学院">
                <el-option v-for="(item, index) in collegeOptions" :key="index"  :label="item.name"
                             :value="item.collegeId"  :disabled="item.disabled">
                   </el-option>
@@ -66,7 +69,7 @@
         <div class="info-row">
           <div class="info-label">所属专业:</div>
           <div class="info-value" >
-            <el-select v-model="selectedMajor"  placeholder="请选择所属专业">
+            <el-select v-model="from.majorId"  placeholder="请选择所属专业">
                <el-option v-for="(item, index) in majorOptions" :key="index" :label="item.name"
                              :value="item.majorId" :disabled="item.disabled"></el-option>
             </el-select>
@@ -75,7 +78,7 @@
         <div class="info-row">
           <div class="info-label">所属年级:</div>
           <div class="info-value"  >
-            <el-select v-model="selectedGrade"  placeholder="请选择所属年级">
+            <el-select v-model="from.gradeId"  placeholder="请选择所属年级">
                <el-option v-for="(item, index) in gradeOptions" :key="index" :label="item.name"
                              :value="item.gradeId" :disabled="item.disabled"></el-option>
             </el-select>
@@ -84,50 +87,49 @@
         <div class="info-row">
           <div class="info-label">所属班级:</div>
           <div class="info-value" >
-            <el-select v-model="selectedClass" placeholder="请选择所属班级">
+            <el-select v-model="from.classId" placeholder="请选择所属班级">
                <el-option v-for="(item, index) in classOptions" :key="index" :label="item.name"
                              :value="item.classId" :disabled="item.disabled"></el-option>
             </el-select>
           </div>
         </div>
-        <div class="info-row"> 
-          <div class="info-label">用户邮箱:</div> 
-          <div class="info-value"> 
+        <div class="info-row">
+          <div class="info-label">用户邮箱:</div>
+          <div class="info-value">
             <!-- <input type="text" v-model="email" /> -->
             <el-input
-              v-model="email"
+              v-model="from.email"
               placeholder="请输入邮箱"
               clearable
-              @keyup.enter.native="handleQuery"
             />
-          </div> 
-        </div> 
-        <div class="info-row"> 
-          <div class="info-label">手机号码:</div> 
+          </div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">家庭住址:</div>
+            <div class="info-value">
+              <!-- <input type="text" v-model="userName" /> -->
+              <el-input
+                v-model="from.address"
+                placeholder="请输入家庭住址"
+                clearable
+              />
+            </div>
+        </div>
+        <div class="info-row">
+          <div class="info-label">手机号码:</div>
           <div class="info-value">
             <!-- <input type="text" v-model="phoneNumber" /> -->
             <el-input
-              v-model="phoneNumber"
+              v-model="from.phone"
               placeholder="请输入手机号码"
               clearable
-              @keyup.enter.native="handleQuery"
             />
-          </div> 
-        </div> 
-        <div class="info-row"> 
-          <div class="info-label">最后登录时间:</div> 
-          <div class="info-value">{{ lastLogin }}</div> 
-        </div> 
-        <div class="info-row"> 
-          <div class="info-label">创建时间:</div> 
-          <div class="info-value">{{ createTime }}</div> 
-        </div> 
-        <div slot="footer" class="dialog-footer">
-            <el-button type="primary" @click="submitForm">确 定</el-button>
-            <el-button @click="cancel">取 消</el-button>
+          </div>
         </div>
-    </form>
-    </div>  
+        <div slot="footer" class="dialog-footer" style="margin: 0 auto">
+            <el-button type="primary" @click="submitForm">确 定</el-button>
+        </div>
+    </div>
 </div>
 </template>
 
@@ -233,7 +235,7 @@ li {
   font-weight: bold;
 }
 .info-value {
-  
+
   text-align: right;
   color: #555;
 }
@@ -259,36 +261,34 @@ li {
 
 <script>
 import {fieldcollegeFun, fieldmajorFun, fieldgradeFun, fieldclassFun} from "@/api/student/upload";
-import axios from 'axios';
-import { VueSelect } from 'vue-select';
+import {addCustomer, getCustomer, listCustomer,getCustomerOnThis} from "@/api/student/customer";
 export default {
   name: 'Profile',
-  components: {
-    'v-select': VueSelect,
-  },
   data() {
     return {
-      userName: "",
-      nickName: "",
-      userType: "",
-      email: "",
-      phoneNumber: "",
-      lastLogin: "",
-      createTime: "",
-      selectedSex:'',
-      selectedCollege: '',
-      selectedMajor: '',
-      selectedGrade: '',
-      selectedClass: '',
+      from: {
+        name: "",
+        email: "",
+        phone: "",
+        createTime: "",
+        sex:'',
+        address: '',
+        collegeId: '',
+        majorId: '',
+        gradeId: '',
+        classId: '',
+        idCard:'',
+        coBorrowerName:'',
+        coBorrowerNameId:'',
+        options: [{
+          value: '1',
+          label: '男'
+        },
+          {
+            value: '2',
+            label: '女'
+          }],},
       avatar: "https://local-imge.oss-cn-beijing.aliyuncs.com/images/%E5%A4%B4%E5%83%8F.jpg",
-      options: [{
-        value: '1',
-        label: '男'
-      },
-        {
-          value: '2',
-          label: '女'
-        }],
       collegeOptions: [],
       majorOptions: [],
       gradeOptions: [],
@@ -300,30 +300,54 @@ export default {
     this.getListMajor()
     this.getListGrade()
     this.getListbanji()
+    this.getStudent()
   },
   methods: {
     submitForm() {
       // 使用axios库向后端API发送表单数据
-      axios.post('/dev-api/system/customer/user', {
-        userName:this.userName,
-        selectedSex:this.selectedSex,
-        nickName: this.nickName,
-        userType: this.userType,
-        college: this.selectedCollege,
-        major: this.selectedMajor,
-        grade: this.selectedGrade,
-        class: this.selectedClass,
-        phoneNumber: this.phone,
-        lastLogin:this.lastLogin,
-        createTime:this.createTime,
-        email: this.email,
-      })
+      addCustomer(this.from)
         .then(() => {
-          alert('提交成功');
+          $.message().success("信息新增成功")
+
         })
         .catch((error) => {
-          console.error(error);
-          alert('提交失败');
+          $.message().success("信息新增成功")
+        });
+    },
+    getStudent() {
+      //获取cookie
+      getCustomerOnThis()
+        .then((res) => {
+          console.log(res)
+          this.from = res.data;
+          this.collegeOptions.forEach((value)=>{
+            if (value.id === this.form.collegeId){
+              this.form.collegeId = value.name;
+              console.log(value)
+            }
+          })
+
+          this.majorOptions.forEach((value)=>{
+            if (value.id === this.form.majorId){
+              this.form.majorId = value.name;
+            }
+          })
+
+
+          this.gradeOptions.forEach((value)=>{
+            if (value.id === this.form.gradeId){
+              this.form.gradeId = value.name;
+            }
+          })
+
+          this.classOptions.forEach((value)=>{
+            if (value.id === this.form.classId){
+              this.form.classId = value.name;
+            }
+          })
+        })
+        .catch((error) => {
+
         });
     },
     getListCollege() {
@@ -346,7 +370,7 @@ export default {
         this.classOptions = res.rows
       })
     },
-    
+
   },
 };
 </script>
