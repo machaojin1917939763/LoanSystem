@@ -10,8 +10,10 @@ import java.util.List;
 import com.loan.common.core.domain.entity.SysUser;
 import com.loan.common.utils.DateUtils;
 import com.loan.system.domain.StuBank;
+import com.loan.system.domain.StuCustomer;
 import com.loan.system.domain.vo.PactVo;
 import com.loan.system.mapper.StuBankMapper;
+import com.loan.system.service.IStuCustomerService;
 import org.apache.poi.ss.usermodel.DataFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,9 @@ public class StuContractServiceImpl implements IStuContractService
     private SysUserServiceImpl sysUserService;
 
     @Autowired
+    private IStuCustomerService stuCustomerService;
+
+    @Autowired
     private StuBankMapper bankMapper;
 
     /**
@@ -60,7 +65,13 @@ public class StuContractServiceImpl implements IStuContractService
     @Override
     public List<StuContract> selectStuContractList(StuContract stuContract)
     {
-        return stuContractMapper.selectStuContractList(stuContract);
+        List<StuContract> list = stuContractMapper.selectStuContractList(stuContract);
+        for (StuContract item : list){
+
+            StuCustomer stuCustomer = stuCustomerService.selectStuCustomerByCustomerId(item.getStudentId());
+            item.setStudentName(stuCustomer.getName());
+        }
+        return list;
     }
 
     /**

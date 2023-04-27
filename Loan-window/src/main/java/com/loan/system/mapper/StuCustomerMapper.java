@@ -60,4 +60,6 @@ public interface StuCustomerMapper
      * @return 结果
      */
     public int deleteStuCustomerByCustomerIds(Long[] customerIds);
+
+    StuCustomer selectStuCustomerOnThis(String username);
 }

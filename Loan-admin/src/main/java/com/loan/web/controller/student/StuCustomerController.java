@@ -1,8 +1,11 @@
 package com.loan.web.controller.student;
 
+import java.util.Arrays;
 import java.util.List;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,6 +72,25 @@ public class StuCustomerController extends BaseController
         return success(stuCustomerService.selectStuCustomerByCustomerId(customerId));
     }
 
+    @GetMapping(value = "/onThis")
+    public AjaxResult getInfoOnThis(HttpServletRequest request)
+    {
+        Cookie[] cookies = request.getCookies();
+        String username = "";
+        System.out.println(Arrays.toString(cookies));
+        for (Cookie cookie : cookies) {
+            System.out.println(cookie.getName() + "   " + cookie.getValue());
+            if (cookie.getName().equals("username")){
+                username = cookie.getValue();
+            }
+        }
+        if (username.equals("")){
+            return error();
+        }
+        StuCustomer stuCustomer = stuCustomerService.selectStuCustomerOnThis(username);
+        return success().put("data",stuCustomer);
+    }
+
     /**
      * 新增客户信息管理
      */
@@ -77,6 +99,7 @@ public class StuCustomerController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody StuCustomer stuCustomer)
     {
+        System.out.println(stuCustomer);
         return toAjax(stuCustomerService.insertStuCustomer(stuCustomer));
     }
 
@@ -91,12 +114,14 @@ public class StuCustomerController extends BaseController
         return toAjax(stuCustomerService.updateStuCustomer(stuCustomer));
     }
 
+
+
     /**
      * 删除客户信息管理
      */
 //    @PreAuthorize("@ss.hasPermi('system:customer:remove')")
     @Log(title = "客户信息管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{customerIds}")
+    @DeleteMapping("/{customerIds}")
     public AjaxResult remove(@PathVariable Long[] customerIds)
     {
         return toAjax(stuCustomerService.deleteStuCustomerByCustomerIds(customerIds));

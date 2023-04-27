@@ -42,3 +42,10 @@ export function delCustomer(customerId) {
     method: 'delete'
   })
 }
+
+export function getCustomerOnThis() {
+  return request({
+    url: '/system/customer/onThis',
+    method: 'get'
+  })
+}

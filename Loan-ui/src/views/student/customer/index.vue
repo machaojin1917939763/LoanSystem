@@ -106,13 +106,18 @@
     </el-row>
     <el-table v-loading="loading" :data="customerList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="学生信息ID" align="center" prop="customerId" />
+      <el-table-column label="学生ID" align="center" prop="customerId" />
       <el-table-column label="学生姓名" align="center" prop="name" />
       <el-table-column label="性别" align="center" prop="sex" />
       <el-table-column label="学号" align="center" prop="studentId" />
       <el-table-column label="地址" align="center" prop="address" />
       <el-table-column label="共同借款人姓名" align="center" prop="coBorrowerName" />
-      <el-table-column label="所属班级ID" align="center" prop="classId" />
+      <el-table-column label="共同借款人身份证号" align="center" prop="coBorrowerNameId" />
+      <el-table-column label="所属专业" align="center" prop="majorId" />
+      <el-table-column label="所属年级" align="center" prop="gradeId" />
+      <el-table-column label="电子邮件" align="center" prop="email" />
+      <el-table-column label="联系电话" align="center" prop="phone" />
+      <el-table-column label="所属班级" align="center" prop="classId" />
       <el-table-column label="创建人" align="center" prop="creator" />
       <el-table-column label="更新人" align="center" prop="updater" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
