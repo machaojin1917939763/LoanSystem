@@ -41,7 +41,9 @@ public class StuCollegeServiceImpl implements IStuCollegeService
     @Override
     public List<StuCollege> selectStuCollegeList(StuCollege stuCollege)
     {
-        return stuCollegeMapper.selectStuCollegeList(stuCollege);
+        List<StuCollege> stuColleges = stuCollegeMapper.selectStuCollegeList(stuCollege);
+
+        return stuColleges;
     }
 
     /**

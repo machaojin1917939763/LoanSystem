@@ -304,7 +304,6 @@ export default {
     this.getListMajor()
     this.getListGrade()
     this.getListbanji()
-    this.getStudent()
   },
   methods: {
     submitForm() {
@@ -320,43 +319,28 @@ export default {
         });
     },
     changgeEdit(){
+      this.getStudent()
+      console.log("collegeOptions")
+      console.log(this.collegeOptions)
+      console.log("gradeOptions")
+      console.log(this.gradeOptions)
+      console.log("majorOptions")
+      console.log(this.majorOptions)
+      console.log("classOptions")
+      console.log(this.classOptions)
       this.isEdit = null;
     },
     getStudent() {
-      //获取cookie
       getCustomerOnThis()
         .then((res) => {
           this.from = res.data;
-          if (this.form.idCard != null){
-            this.isEdit = this.form.idCard;
-          }
-          this.collegeOptions.forEach((value)=>{
-            if (value.id === this.form.collegeId){
-              this.form.collegeId = value.name;
-            }
-          })
-
-          this.majorOptions.forEach((value)=>{
-            if (value.id === this.form.majorId){
-              this.form.majorId = value.name;
-            }
-          })
+          console.log(this.from)
 
 
-          this.gradeOptions.forEach((value)=>{
-            if (value.id === this.form.gradeId){
-              this.form.gradeId = value.name;
-            }
-          })
-
-          this.classOptions.forEach((value)=>{
-            if (value.id === this.form.classId){
-              this.form.classId = value.name;
-            }
-          })
+          console.log(this.from)
         })
         .catch((error) => {
-
+          console.log(error)
         });
     },
     getListCollege() {

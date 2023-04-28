@@ -61,6 +61,8 @@ public interface SysUserRoleMapper
      */
     public int deleteUserRoleInfo(SysUserRole userRole);
 
+    public List<SysUserRole> selectByUserId(@Param("id") String id);
+
     /**
      * 批量取消授权用户角色
      * 

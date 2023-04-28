@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.loan.system.domain.vo.PactVo;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,10 +43,10 @@ public class StuContractController extends BaseController
      */
 //    @PreAuthorize("@ss.hasPermi('system:contract:list')")
     @GetMapping("/list")
-    public TableDataInfo list(StuContract stuContract)
+    public TableDataInfo list(StuContract stuContract,HttpServletRequest request)
     {
         startPage();
-        List<StuContract> list = stuContractService.selectStuContractList(stuContract);
+        List<StuContract> list = stuContractService.selectStuContractList(stuContract,request);
         return getDataTable(list);
     }
 
@@ -57,9 +56,9 @@ public class StuContractController extends BaseController
 //    @PreAuthorize("@ss.hasPermi('system:contract:export')")
     @Log(title = "合同信息管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, StuContract stuContract)
+    public void export(HttpServletResponse response, StuContract stuContract ,HttpServletRequest request)
     {
-        List<StuContract> list = stuContractService.selectStuContractList(stuContract);
+        List<StuContract> list = stuContractService.selectStuContractList(stuContract, request);
         ExcelUtil<StuContract> util = new ExcelUtil<StuContract>(StuContract.class);
         util.exportExcel(response, list, "合同信息管理数据");
     }
@@ -80,9 +79,9 @@ public class StuContractController extends BaseController
 //    @PreAuthorize("@ss.hasPermi('system:contract:add')")
     @Log(title = "合同信息管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody StuContract stuContract)
+    public AjaxResult add(@RequestBody StuContract stuContract,HttpServletRequest request)
     {
-        return toAjax(stuContractService.insertStuContract(stuContract));
+        return toAjax(stuContractService.insertStuContract(stuContract,request));
     }
 
     /**

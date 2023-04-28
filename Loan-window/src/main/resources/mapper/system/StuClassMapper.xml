@@ -38,7 +38,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectStuClassVo"/>
         where class_id = #{classId}
     </select>
-        
+    <select id="selectStuClassByName" parameterType="String" resultMap="StuClassResult">
+        <include refid="selectStuClassVo"/>
+        where name = #{classId}
+    </select>
+
     <insert id="insertStuClass" parameterType="StuClass" useGeneratedKeys="true" keyProperty="classId">
         insert into stu_class
         <trim prefix="(" suffix=")" suffixOverrides=",">

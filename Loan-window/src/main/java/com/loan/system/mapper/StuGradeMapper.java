@@ -60,4 +60,6 @@ public interface StuGradeMapper
      * @return 结果
      */
     public int deleteStuGradeByGradeIds(Long[] gradeIds);
+
+    StuGrade selectStuBradeByName(String gradeId);
 }

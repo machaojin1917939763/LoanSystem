@@ -6,6 +6,7 @@ import com.loan.system.domain.StuContract;
 import com.loan.system.domain.vo.PactVo;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 合同信息管理Service接口
@@ -25,19 +26,21 @@ public interface IStuContractService
 
     /**
      * 查询合同信息管理列表
-     * 
+     *
      * @param stuContract 合同信息管理
+     * @param request
      * @return 合同信息管理集合
      */
-    public List<StuContract> selectStuContractList(StuContract stuContract);
+    public List<StuContract> selectStuContractList(StuContract stuContract, HttpServletRequest request);
 
     /**
      * 新增合同信息管理
-     * 
+     *
      * @param stuContract 合同信息管理
+     * @param request
      * @return 结果
      */
-    public int insertStuContract(StuContract stuContract);
+    public int insertStuContract(StuContract stuContract, HttpServletRequest request);
 
     /**
      * 修改合同信息管理

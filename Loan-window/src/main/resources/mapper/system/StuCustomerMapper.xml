@@ -52,6 +52,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectStuCustomerVo"/>
         where name = #{username}
     </select>
+    <select id="selectStuCustomerByName" parameterType="String" resultMap="StuCustomerResult">
+        <include refid="selectStuCustomerVo"/>
+        where name = #{username}
+    </select>
+    <select id="selectStuCustomerByCollegeId" parameterType="String" resultMap="StuCustomerResult">
+        <include refid="selectStuCustomerVo"/>
+        where college_id = #{collegeId}
+    </select>
+    <select id="selectStuCustomerByMajorId" parameterType="String" resultMap="StuCustomerResult">
+        <include refid="selectStuCustomerVo"/>
+        where major_id = #{majorId}
+    </select>
+    <select id="selectStuCustomerByGradeId" parameterType="String" resultMap="StuCustomerResult">
+        <include refid="selectStuCustomerVo"/>
+        where grade_id = #{gradeId}
+    </select>
+    <select id="selectStuCustomerByClassId" parameterType="String" resultMap="StuCustomerResult">
+        <include refid="selectStuCustomerVo"/>
+        where class_id = #{classId}
+    </select>
 
     <insert id="insertStuCustomer" parameterType="StuCustomer" useGeneratedKeys="true" keyProperty="customerId">
         insert into stu_customer
