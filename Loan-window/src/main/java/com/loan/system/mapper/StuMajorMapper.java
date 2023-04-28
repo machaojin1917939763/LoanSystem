@@ -60,4 +60,7 @@ public interface StuMajorMapper
      * @return 结果
      */
     public int deleteStuMajorByMajorIds(Long[] majorIds);
+
+    StuMajor selectStuMajorByName(String majorId);
+
 }

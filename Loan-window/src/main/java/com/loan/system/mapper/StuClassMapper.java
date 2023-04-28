@@ -2,6 +2,7 @@ package com.loan.system.mapper;
 
 import java.util.List;
 import com.loan.system.domain.StuClass;
+import com.loan.system.domain.StuGrade;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -60,4 +61,8 @@ public interface StuClassMapper
      * @return 结果
      */
     public int deleteStuClassByClassIds(Long[] classIds);
+
+    StuClass selectStuClassByName(String classId);
+
+
 }

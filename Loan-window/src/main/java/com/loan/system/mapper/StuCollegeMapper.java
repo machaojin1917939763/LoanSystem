@@ -60,4 +60,6 @@ public interface StuCollegeMapper
      * @return 结果
      */
     public int deleteStuCollegeByCollegeIds(Long[] collegeIds);
+
+    StuCollege selectStuCollegeByCollegeName(String collegeId);
 }

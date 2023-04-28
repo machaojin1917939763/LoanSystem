@@ -259,8 +259,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
         <el-button @click="cancel">取 消</el-button>
+        <el-button type="primary" @click="submitForm">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -325,6 +325,8 @@ export default {
   created() {
     this.getList();
   },
+
+
   methods: {
     /** 查询合同信息管理列表 */
     getList() {
@@ -382,9 +384,15 @@ export default {
     },
     /** 新增按钮操作 */
     handleAdd() {
-      this.reset();
-      this.open = true;
-      this.title = "添加合同信息管理";
+      this.$modal.confirm("在上传合同时，需要先完善个人信息，否会上传失败！").then(function() {
+      }).then(() => {
+        //跳转页面
+        this.$router.push({ path: "../../index/person" });
+      }).catch(() => {
+        this.reset();
+        this.open = true;
+        this.title = "添加合同信息管理";
+      });
     },
     /** 修改按钮操作 */
     handleUpdate(row) {

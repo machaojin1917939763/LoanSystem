@@ -3,6 +3,7 @@ package com.loan.system.service.impl;
 import java.util.List;
 
 import com.loan.common.utils.DateUtils;
+import com.loan.common.utils.StringUtils;
 import com.loan.system.domain.*;
 import com.loan.system.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,6 +103,44 @@ public class StuCustomerServiceImpl implements IStuCustomerService {
     @Override
     public int updateStuCustomer(StuCustomer stuCustomer) {
         stuCustomer.setUpdateTime(DateUtils.getNowDate());
+        //college
+        try {
+            long l = Long.parseLong(stuCustomer.getCollegeId());
+        } catch (Exception e) {
+            StuCollege college = stuCollegeMapper.selectStuCollegeByCollegeName(stuCustomer.getCollegeId());
+            if (college != null) {
+                stuCustomer.setCollegeId(college.getCollegeId().toString());
+            }
+        }
+        //class
+        try {
+            long l = Long.parseLong(stuCustomer.getClassId());
+        } catch (Exception e) {
+            StuClass stuClass = stuClassMapper.selectStuClassByName(stuCustomer.getClassId());
+            if (stuClass != null) {
+                stuCustomer.setClassId(stuClass.getClassId().toString());
+            }
+        }
+        //grade
+        try {
+            long l = Long.parseLong(stuCustomer.getGradeId());
+        }catch (Exception e){
+           StuGrade stuGrade =  stuGradeMapper.selectStuBradeByName(stuCustomer.getGradeId());
+            if (stuGrade != null) {
+                stuCustomer.setGradeId(stuGrade.getGradeId().toString());
+            }
+        }
+        //major
+        try {
+            long l = Long.parseLong(stuCustomer.getMajorId());
+        }catch (Exception e){
+           StuMajor stuMajor =  stuMajorMapper.selectStuMajorByName(stuCustomer.getMajorId());
+            if (stuMajor != null) {
+                stuCustomer.setMajorId(stuMajor.getMajorId());
+            }
+        }
+
+
         return stuCustomerMapper.updateStuCustomer(stuCustomer);
     }
 
@@ -129,6 +168,32 @@ public class StuCustomerServiceImpl implements IStuCustomerService {
 
     @Override
     public StuCustomer selectStuCustomerOnThis(String username) {
-        return stuCustomerMapper.selectStuCustomerOnThis(username);
+        StuCustomer stuCustomer = stuCustomerMapper.selectStuCustomerOnThis(username);
+        if (!StringUtils.isEmpty(stuCustomer.getGradeId())) {
+            StuGrade stuGrade = stuGradeMapper.selectStuGradeByGradeId(Long.parseLong(stuCustomer.getGradeId()));
+            if (stuGrade != null) {
+                stuCustomer.setGradeId(stuGrade.getName());
+            }
+        }
+        if (!StringUtils.isEmpty(stuCustomer.getMajorId())) {
+            StuMajor stuMajor = stuMajorMapper.selectStuMajorByMajorId(Long.parseLong(stuCustomer.getMajorId()));
+            if (stuMajor != null) {
+                stuCustomer.setMajorId(stuMajor.getName());
+            }
+        }
+        if (!StringUtils.isEmpty(stuCustomer.getClassId())) {
+            StuClass stuClass = stuClassMapper.selectStuClassByClassId(Long.parseLong(stuCustomer.getClassId()));
+            if (stuClass != null) {
+                stuCustomer.setClassId(stuClass.getName());
+            }
+        }
+        if (!StringUtils.isEmpty(stuCustomer.getCollegeId())) {
+            StuCollege stuCollege = stuCollegeMapper.selectStuCollegeByCollegeId(Long.parseLong(stuCustomer.getCollegeId()));
+            if (stuCollege != null) {
+                stuCustomer.setCollegeId(stuCollege.getName());
+            }
+        }
+
+        return stuCustomer;
     }
 }

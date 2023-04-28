@@ -60,4 +60,6 @@ public interface StuBankMapper
      * @return 结果
      */
     public int deleteStuBankByBankIds(Long[] bankIds);
+
+    StuBank selectStuBankByBankName(String bankName);
 }

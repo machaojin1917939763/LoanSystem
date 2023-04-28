@@ -38,7 +38,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectStuMajorVo"/>
         where major_id = #{majorId}
     </select>
-        
+    <select id="selectStuMajorByName" parameterType="String" resultMap="StuMajorResult">
+        <include refid="selectStuMajorVo"/>
+        where name = #{majorId}
+    </select>
+
     <insert id="insertStuMajor" parameterType="StuMajor" useGeneratedKeys="true" keyProperty="majorId">
         insert into stu_major
         <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -25,7 +25,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="共同借款人姓名" prop="coBorrowerName">
+      <el-form-item label="共同借款人" prop="coBorrowerName">
         <el-input
           v-model="queryParams.coBorrowerName"
           placeholder="请输入共同借款人姓名"
@@ -33,26 +33,10 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="所属班级ID" prop="classId">
+      <el-form-item label="所属班级" prop="classId">
         <el-input
           v-model="queryParams.classId"
-          placeholder="请输入所属班级ID"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="创建人" prop="creator">
-        <el-input
-          v-model="queryParams.creator"
-          placeholder="请输入创建人"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="更新人" prop="updater">
-        <el-input
-          v-model="queryParams.updater"
-          placeholder="请输入更新人"
+          placeholder="班级"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -164,8 +148,8 @@
         <el-form-item label="共同借款人姓名" prop="coBorrowerName">
           <el-input v-model="form.coBorrowerName" placeholder="请输入共同借款人姓名" />
         </el-form-item>
-        <el-form-item label="所属班级ID" prop="classId">
-          <el-input v-model="form.classId" placeholder="请输入所属班级ID" />
+        <el-form-item label="所属班级" prop="classId">
+          <el-input v-model="form.classId" placeholder="请输入班级" />
         </el-form-item>
         <el-form-item label="创建人" prop="creator">
           <el-input v-model="form.creator" placeholder="请输入创建人" />

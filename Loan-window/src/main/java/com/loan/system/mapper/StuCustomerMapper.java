@@ -62,4 +62,14 @@ public interface StuCustomerMapper
     public int deleteStuCustomerByCustomerIds(Long[] customerIds);
 
     StuCustomer selectStuCustomerOnThis(String username);
+
+    StuCustomer selectStuCustomerByName(String username);
+
+    List<StuCustomer> selectStuCustomerByCollegeId(String collegeId);
+
+    List<StuCustomer> selectStuCustomerByMajorId(String majorId);
+
+    List<StuCustomer> selectStuCustomerByGradeId(String gradeId);
+
+    List<StuCustomer> selectStuCustomerByClassId(String classId);
 }

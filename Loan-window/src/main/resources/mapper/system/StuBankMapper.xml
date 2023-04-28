@@ -30,7 +30,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectStuBankVo"/>
         where bank_id = #{bankId}
     </select>
-        
+    <select id="selectStuBankByBankName" parameterType="String" resultMap="StuBankResult">
+        <include refid="selectStuBankVo"/>
+        where bank_name = #{bankName}
+    </select>
+
     <insert id="insertStuBank" parameterType="StuBank" useGeneratedKeys="true" keyProperty="bankId">
         insert into stu_bank
         <trim prefix="(" suffix=")" suffixOverrides=",">
