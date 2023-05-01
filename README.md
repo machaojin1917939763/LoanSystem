@@ -4,6 +4,7 @@
 <h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">生源地贷款高校管理系统</h1>
 <h4 align="center">基于SpringBoot+Vue前后端分离的高校管理系统</h4>
 
+![Alt](https://repobeats.axiom.co/api/embed/fb5b21006ec4b748987d72b0aa4314d54b6b2c6a.svg "Repobeats analytics image")
 
 ## 平台简介
 
