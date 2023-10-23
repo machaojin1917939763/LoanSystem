@@ -27,14 +27,13 @@ import com.loan.common.core.page.TableDataInfo;
 
 /**
  * 合同信息管理Controller
- * 
+ *
  * @author loan
  * @date 2023-04-04
  */
 @RestController
 @RequestMapping("/system/contract")
-public class StuContractController extends BaseController
-{
+public class StuContractController extends BaseController {
     @Autowired
     private IStuContractService stuContractService;
 
@@ -43,11 +42,15 @@ public class StuContractController extends BaseController
      */
 //    @PreAuthorize("@ss.hasPermi('system:contract:list')")
     @GetMapping("/list")
-    public TableDataInfo list(StuContract stuContract,HttpServletRequest request)
-    {
+    public TableDataInfo list(StuContract stuContract, HttpServletRequest request) {
         startPage();
-        List<StuContract> list = stuContractService.selectStuContractList(stuContract,request);
-        return getDataTable(list);
+        List<StuContract> list = stuContractService.selectStuContractList(stuContract, request);
+        if (list != null) {
+            return getDataTable(list);
+        }
+        TableDataInfo tableDataInfo = new TableDataInfo();
+        tableDataInfo.setMsg("暂无上传合同");
+        return tableDataInfo;
     }
 
     /**
@@ -56,8 +59,7 @@ public class StuContractController extends BaseController
 //    @PreAuthorize("@ss.hasPermi('system:contract:export')")
     @Log(title = "合同信息管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, StuContract stuContract ,HttpServletRequest request)
-    {
+    public void export(HttpServletResponse response, StuContract stuContract, HttpServletRequest request) {
         List<StuContract> list = stuContractService.selectStuContractList(stuContract, request);
         ExcelUtil<StuContract> util = new ExcelUtil<StuContract>(StuContract.class);
         util.exportExcel(response, list, "合同信息管理数据");
@@ -68,8 +70,7 @@ public class StuContractController extends BaseController
      */
 //    @PreAuthorize("@ss.hasPermi('system:contract:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") Long id) {
         return success(stuContractService.selectStuContractById(id));
     }
 
@@ -79,9 +80,8 @@ public class StuContractController extends BaseController
 //    @PreAuthorize("@ss.hasPermi('system:contract:add')")
     @Log(title = "合同信息管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody StuContract stuContract,HttpServletRequest request)
-    {
-        return toAjax(stuContractService.insertStuContract(stuContract,request));
+    public AjaxResult add(@RequestBody StuContract stuContract, HttpServletRequest request) {
+        return toAjax(stuContractService.insertStuContract(stuContract, request));
     }
 
     /**
@@ -94,7 +94,7 @@ public class StuContractController extends BaseController
 //        return toAjax(stuContractService.insertStuContract(stuContract));
         System.out.println(pactVo);
         Cookie[] cookies = request.getCookies();
-        return toAjax(stuContractService.addContract(pactVo,cookies));
+        return toAjax(stuContractService.addContract(pactVo, cookies));
     }
 
     /**
@@ -103,8 +103,7 @@ public class StuContractController extends BaseController
 //    @PreAuthorize("@ss.hasPermi('system:contract:edit')")
     @Log(title = "合同信息管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody StuContract stuContract)
-    {
+    public AjaxResult edit(@RequestBody StuContract stuContract) {
         return toAjax(stuContractService.updateStuContract(stuContract));
     }
 
@@ -114,8 +113,7 @@ public class StuContractController extends BaseController
 //    @PreAuthorize("@ss.hasPermi('system:contract:remove')")
     @Log(title = "合同信息管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
-    {
+    public AjaxResult remove(@PathVariable Long[] ids) {
         return toAjax(stuContractService.deleteStuContractByIds(ids));
     }
 }

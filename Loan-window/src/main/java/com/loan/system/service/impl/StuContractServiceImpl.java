@@ -3,13 +3,12 @@ package com.loan.system.service.impl;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 import com.loan.common.core.domain.entity.SysUser;
+import com.loan.common.core.domain.model.LoginUser;
 import com.loan.common.utils.DateUtils;
 import com.loan.system.domain.StuBank;
 import com.loan.system.domain.StuCustomer;
@@ -57,6 +56,9 @@ public class StuContractServiceImpl implements IStuContractService {
     @Autowired
     private StuBankMapper stuBankMapper;
 
+    @Autowired
+    private TokenUtils tokenUtils;
+
     /**
      * 查询合同信息管理
      *
@@ -84,13 +86,9 @@ public class StuContractServiceImpl implements IStuContractService {
                 item.setStudentName(stuCustomer.getName());
             }
         }
-        Cookie[] cookies = request.getCookies();
-        String username = "";
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("username")) {
-                username = cookie.getValue();
-            }
-        }
+        LoginUser loginUser = tokenUtils.getLoginUser(request);
+        String username = loginUser.getUsername();
+
         //根据cookie中的用户查询
         //1、先拿到username，查询出这个人的信息
         SysUser sysUser = userMapper.selectUserByUserName(username);
@@ -107,10 +105,16 @@ public class StuContractServiceImpl implements IStuContractService {
         }
         //如果是学生
         if (flag.get()) {
-            return list.stream().filter((value) -> {
+/*            return list.stream().filter((value) -> {
                 return value.getStudentId().toString().equals(sysUser.getUserId().toString());
             }).collect(Collectors.toList());
-            //校方人员
+            //校方人员*/
+            for (StuContract item : list) {
+                if (sysUser.getUserId().toString().equals(item.getStudentId())) {
+                    return Collections.singletonList(item);
+                }
+            }
+            return null;
         } else {
             switch (sysUser.getUserName()) {
                 case "college": {
@@ -120,19 +124,19 @@ public class StuContractServiceImpl implements IStuContractService {
                     return getStuContracts(list, sysUser, customers);
                 }
                 case "major": {
-                    //根据学院id查询所有的学生
+                    //根据专业id查询所有的学生
                     List<StuCustomer> customers = stuCustomerMapper.selectStuCustomerByMajorId(stuCustomer.getMajorId());
                     //根据学生查询所有的合同
                     return getStuContracts(list, sysUser, customers);
                 }
                 case "grade": {
-                    //根据学院id查询所有的学生
+                    //根据年纪id查询所有的学生
                     List<StuCustomer> customers = stuCustomerMapper.selectStuCustomerByGradeId(stuCustomer.getGradeId());
                     //根据学生查询所有的合同
                     return getStuContracts(list, sysUser, customers);
                 }
                 case "class": {
-                    //根据学院id查询所有的学生
+                    //根据班级id查询所有的学生
                     List<StuCustomer> customers = stuCustomerMapper.selectStuCustomerByClassId(stuCustomer.getClassId());
                     //根据学生查询所有的合同
                     return getStuContracts(list, sysUser, customers);

@@ -22,6 +22,10 @@
             <groupId>com.machaojin</groupId>
             <artifactId>Loan-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.machaojin</groupId>
+            <artifactId>Loan-framework</artifactId>
+        </dependency>
 
     </dependencies>
 
